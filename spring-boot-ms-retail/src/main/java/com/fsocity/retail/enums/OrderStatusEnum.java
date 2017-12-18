@@ -4,7 +4,7 @@ import lombok.Getter;
 
 /**
  * @author zail
- * @version imp01.0.0
+ * @version 0.0.1
  */
 @Getter
 public enum OrderStatusEnum {

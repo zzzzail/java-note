@@ -21,7 +21,7 @@ public class MainTest {
 
   public static void main(String[] args) {
     ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainTest.class);
-    UserService userService = applicationContext.getBean(UserService.class);
+    UserService userService = (UserService) applicationContext.getBean(UserService.class);
     userService.findUserById(1);
   }
 }
