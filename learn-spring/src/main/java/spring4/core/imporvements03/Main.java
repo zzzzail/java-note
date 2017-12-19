@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan
-public class MainTest {
+public class Main {
 
   public static void main(String[] args) {
-    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainTest.class);
+    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Main.class);
     Results results = applicationContext.getBean(Results.class);
     System.out.println(results);
   }

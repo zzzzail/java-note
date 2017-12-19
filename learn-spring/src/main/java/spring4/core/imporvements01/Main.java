@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
  * @author zail
  * @version 0.0.imp01
  */
-public class MainTest {
+public class Main {
 
   @Bean
   public UserService userServiceFindUserById() {
@@ -20,7 +20,7 @@ public class MainTest {
   }
 
   public static void main(String[] args) {
-    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainTest.class);
+    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Main.class);
     UserService userService = (UserService) applicationContext.getBean(UserService.class);
     userService.findUserById(1);
   }

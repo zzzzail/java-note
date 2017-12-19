@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @Import(value = {ComponentClass.class})
-public class MainTest {
+public class Main {
 
   public static void main(String[] args) {
-    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainTest.class);
+    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Main.class);
     ComponentClass component = applicationContext.getBean(ComponentClass.class);
     component.print();
   }
