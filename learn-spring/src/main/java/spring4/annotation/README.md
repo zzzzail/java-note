@@ -18,5 +18,5 @@
   * @Autowired 注解可以应用到数组类型的属性上, 此时spring将会把所有匹配的Bean进行自动装配(spring4.x 之后可以使用@Order注解为匹配的Bean进行排序操作)
   * @Autowired 注解可以应用到集合类型的属性上, 此时spring将会把所有匹配的Bean进行自动装配
   * @Autowired 注解可以应用到java.util.Map上, 若该Map的键类型为String, 那么spring将自动装配与之Map值类型兼容的Bean, 此时Bean的名称作为键值.
+  * [强制] 使用@Autowired、@Resource、@Inject时必须配合@Qualifier("name")进行使用
   
-
