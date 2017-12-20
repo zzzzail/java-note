@@ -13,11 +13,11 @@ import spring4.annotation.controller.UserController;
 public class Main {
   
   public static void main(String[] args) {
-  
+    
     ApplicationContext ctx = new AnnotationConfigApplicationContext(Main.class);
     TestObject testObject = ctx.getBean(TestObject.class);
     System.out.println(testObject);
-  
+    
     UserController userController = (UserController) ctx.getBean("userController");
     userController.execute();
     

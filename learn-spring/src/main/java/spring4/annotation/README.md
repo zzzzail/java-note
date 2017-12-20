@@ -1,6 +1,5 @@
 # spring 注解
 
-
 * 组件扫描(component scanning): spring 能够从classpath下自动扫描, 侦测和实例化具有特定注解的组件.
 * 特定注解包括:
   * @Component: 基本注解, 标识一个受spring管理的组件.

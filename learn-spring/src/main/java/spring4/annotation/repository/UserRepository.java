@@ -6,6 +6,9 @@ package spring4.annotation.repository;
  */
 public interface UserRepository {
   
+  /**
+   * save data.
+   */
   void save();
   
 }
