@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,8 +21,13 @@ public class SetJDBCTemplate {
   
   @Bean
   public JdbcTemplate configJdbcTemplate() {
-    JdbcTemplate jdbcTemplate = new JdbcTemplate();
-    jdbcTemplate.setDataSource(dataSource);
-    return jdbcTemplate;
+    JdbcTemplate template = new JdbcTemplate(dataSource);
+    return template;
+  }
+  
+  @Bean
+  public NamedParameterJdbcTemplate setNamedParameterJdbcTemplate() {
+    NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(dataSource);
+    return template;
   }
 }
