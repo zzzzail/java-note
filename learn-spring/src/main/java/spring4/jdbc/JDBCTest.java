@@ -7,7 +7,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +44,20 @@ public class JDBCTest {
     paramMap.put("age", 22);
     
     namedParameterJdbcTemplate.update(sql, paramMap);
+  }
+  
+  /**
+   * 可以使用 SqlParameterSource 传入自定义的对象
+   */
+  @Test
+  public void testNamedParameterJdbcTemplate2() {
+    String sql = "INSERT INTO test (name, age) VALUES (:name, :age)";
+    TestObject testObject = new TestObject();
+    testObject.setName("EE");
+    testObject.setAge(33);
+  
+    SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(testObject);
+    namedParameterJdbcTemplate.update(sql, parameterSource);
   }
   
   /**
