@@ -85,7 +85,7 @@ public class JDBCTest {
   }
   
   /**
-   * 获取相应的对象
+   * 获取相应的对象 (具名参数)
    * 1. 其中 RowMapper 指定如何映射结果集的行, 常用的实现类为 BeanPropertyRowMapper
    * 2. 使用 sql 中的别名完成列名和类的属性名的映射
    */
