@@ -16,9 +16,12 @@ import java.util.List;
  * @since 2017-12-25
  */
 @RestController
+@RequestMapping("/user")
 public class UserController {
   
-  @RequestMapping(value = "/user", method = RequestMethod.GET)
+  // @RequestMapping(value = "/user", method = RequestMethod.GET)
+  // @GetMapping("/user")
+  @GetMapping
   @JsonView(UserDTO.UserDTOSimpleView.class)
   public List<UserDTO> queryUsers(UserQueryCondition userQueryCondition,
                                  @PageableDefault(page = 2, size = 17, sort = "age, desc") Pageable pageable) {
@@ -34,7 +37,8 @@ public class UserController {
     return users;
   }
   
-  @GetMapping("/user/{id:\\d+}")
+  // @GetMapping("/user/{id:\\d+}")
+  @GetMapping("/{id:\\d+}")
   @JsonView(UserDTO.UserDTODetailView.class)
   public UserDTO queryUser(@PathVariable String id) {
   
