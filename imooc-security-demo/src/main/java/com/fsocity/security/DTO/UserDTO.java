@@ -1,6 +1,7 @@
 package com.fsocity.security.DTO;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fsocity.security.validator.MyConstraint;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -21,6 +22,7 @@ public class UserDTO {
   private String id;
   
   @JsonView(UserDTOSimpleView.class)
+  @MyConstraint(message = "这是个测试")
   private String username;
   
   @JsonView(UserDTODetailView.class)

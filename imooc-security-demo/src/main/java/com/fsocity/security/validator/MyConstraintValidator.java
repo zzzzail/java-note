@@ -24,7 +24,6 @@ public class MyConstraintValidator implements ConstraintValidator<MyConstraint, 
   public boolean isValid(Object value, ConstraintValidatorContext context) {
     
     System.out.println(value);
-  
     helloService.greeting("zail");
     
     return false;

@@ -97,7 +97,7 @@ public class UserControllerTest {
       .andExpect(MockMvcResultMatchers.status().isOk())
       .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
       .andReturn().getResponse().getContentAsString();
-  
+    
     System.out.println(result);
   }
   
@@ -106,7 +106,7 @@ public class UserControllerTest {
     Date date = new Date(LocalDateTime.now().plusYears(1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
     System.out.println(date.getTime());
     String content = "{\"id\": 1, \"username\": \"zail\", \"password\": null, \"birthday\": " + date.getTime() + "}";
-  
+    
     String result = mockMvc.perform(
       MockMvcRequestBuilders
         .put("/user/1")
@@ -116,8 +116,17 @@ public class UserControllerTest {
       .andExpect(MockMvcResultMatchers.status().isOk())
       .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
       .andReturn().getResponse().getContentAsString();
-  
+    
     System.out.println(result);
+  }
+  
+  @Test
+  public void whenDeleteUserSuccess() throws Exception {
+    mockMvc.perform(
+      MockMvcRequestBuilders
+        .delete("/user/1")
+    )
+      .andExpect(MockMvcResultMatchers.status().isOk());
   }
   
 }

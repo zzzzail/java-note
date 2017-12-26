@@ -45,7 +45,7 @@ public class UserController {
   @JsonView(UserDTO.UserDTODetailView.class)
   public UserDTO queryUser(@PathVariable String id) {
     
-    System.out.println(id);
+    System.out.println("进入 queryUser 服务.");
     
     UserDTO user = new UserDTO();
     user.setUsername("zail");
@@ -89,6 +89,11 @@ public class UserController {
     
     userDTO.setId("1");
     return userDTO;
+  }
+  
+  @DeleteMapping("/{id:\\d+}")
+  public void deleteUser(@PathVariable String id) {
+    System.out.println(id);
   }
   
 }
