@@ -5,9 +5,12 @@ import com.fsocity.security.DTO.UserDTO;
 import com.fsocity.security.condition.UserQueryCondition;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +27,7 @@ public class UserController {
   @GetMapping
   @JsonView(UserDTO.UserDTOSimpleView.class)
   public List<UserDTO> queryUsers(UserQueryCondition userQueryCondition,
-                                 @PageableDefault(page = 2, size = 17, sort = "age, desc") Pageable pageable) {
+                                  @PageableDefault(page = 2, size = 17, sort = "age, desc") Pageable pageable) {
     
     System.out.println(userQueryCondition);
     System.out.println(pageable);
@@ -41,7 +44,7 @@ public class UserController {
   @GetMapping("/{id:\\d+}")
   @JsonView(UserDTO.UserDTODetailView.class)
   public UserDTO queryUser(@PathVariable String id) {
-  
+    
     System.out.println(id);
     
     UserDTO user = new UserDTO();
@@ -49,6 +52,43 @@ public class UserController {
     user.setPassword("pass");
     
     return user;
+  }
+  
+  @PostMapping
+  @JsonView(UserDTO.UserDTOSimpleView.class)
+  public UserDTO createUser(@RequestBody @Valid UserDTO userDTO,
+                            BindingResult errors) {
+    
+    if (errors.hasErrors()) {
+      errors.getAllErrors().stream().forEach(e -> System.out.println(e));
+    }
+    
+    System.out.println(userDTO);
+    
+    userDTO.setId("1");
+    return userDTO;
+  }
+  
+  @PutMapping("/{id:\\d+}")
+  @JsonView(UserDTO.UserDTOSimpleView.class)
+  public UserDTO updateUser(@Valid @RequestBody UserDTO userDTO,
+                            BindingResult errors) {
+    
+    if (errors.hasErrors()) {
+      errors.getAllErrors().stream().forEach(
+        e -> {
+          // FieldError fieldError = (FieldError)e;
+          // String message = fieldError.getField() + ": " + fieldError.getDefaultMessage();
+          // System.out.println(message);
+          System.out.println(e.getDefaultMessage());
+        }
+      );
+    }
+    
+    System.out.println(userDTO);
+    
+    userDTO.setId("1");
+    return userDTO;
   }
   
 }

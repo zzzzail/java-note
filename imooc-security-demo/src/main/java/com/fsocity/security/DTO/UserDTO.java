@@ -2,6 +2,10 @@ package com.fsocity.security.DTO;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Past;
+import java.util.Date;
 
 /**
  * @author zail
@@ -14,10 +18,18 @@ public class UserDTO {
   public interface UserDTODetailView extends UserDTOSimpleView {}
   
   @JsonView(UserDTOSimpleView.class)
+  private String id;
+  
+  @JsonView(UserDTOSimpleView.class)
   private String username;
   
   @JsonView(UserDTODetailView.class)
+  @NotBlank(message = "密码不能为空.")
   private String password;
+  
+  @JsonView(UserDTOSimpleView.class)
+  @Past(message = "生日必须是过去的时间.")
+  private Date birthday;
   
   public UserDTO() {
   }
