@@ -1,6 +1,5 @@
 package com.fsocity.security.learn_spring_boot.service;
 
-import com.fsocity.learn_spring_boot.pojo.User;
 import com.fsocity.security.learn_spring_boot.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

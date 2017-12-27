@@ -1,6 +1,5 @@
 package com.fsocity.security.learn_spring_boot.repository;
 
-import com.fsocity.learn_spring_boot.entity.Person;
 import com.fsocity.security.learn_spring_boot.entity.Person;
 import org.springframework.stereotype.Repository;
 

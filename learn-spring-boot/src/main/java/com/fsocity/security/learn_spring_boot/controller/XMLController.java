@@ -1,6 +1,6 @@
 package com.fsocity.security.learn_spring_boot.controller;
 
-import com.fsocity.learn_spring_boot.pojo.User;
+import com.fsocity.security.learn_spring_boot.pojo.User;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -25,10 +25,16 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     
     http
       .formLogin()
+      .loginPage("/authentication/require") // 自定义登录页面
+      .loginProcessingUrl("/authentication/form")
       .and()
       .authorizeRequests()
+      .antMatchers("/authentication/require").permitAll() // 该路由不需要身份认证
       .anyRequest()
-      .authenticated();
+      .authenticated()
+      
+      .and()
+      .csrf().disable();
     
   }
 }
