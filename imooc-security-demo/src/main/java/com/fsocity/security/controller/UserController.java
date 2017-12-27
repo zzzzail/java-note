@@ -3,6 +3,7 @@ package com.fsocity.security.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fsocity.security.DTO.UserDTO;
 import com.fsocity.security.condition.UserQueryCondition;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,7 @@ public class UserController {
   // @GetMapping("/user")
   @GetMapping
   @JsonView(UserDTO.UserDTOSimpleView.class)
+  @ApiOperation(value = "查询所有用户")
   public List<UserDTO> queryUsers(UserQueryCondition userQueryCondition,
                                   @PageableDefault(page = 2, size = 17, sort = "age, desc") Pageable pageable) {
     

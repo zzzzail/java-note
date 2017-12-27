@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.JsonPath;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -127,6 +128,24 @@ public class UserControllerTest {
         .delete("/user/1")
     )
       .andExpect(MockMvcResultMatchers.status().isOk());
+  }
+  
+  @Test
+  public void whenUploadSuccess() throws Exception {
+    String result = mockMvc.perform(
+      MockMvcRequestBuilders
+        .fileUpload("/file")
+        .file(new MockMultipartFile("file", "test.txt", "multipart/form-data", "Hello upload".getBytes()))
+    )
+      .andExpect(MockMvcResultMatchers.status().isOk())
+      .andReturn().getResponse().getContentAsString();
+  
+    System.out.println(result);
+  }
+  
+  @Test
+  public void testSystemFolder() {
+    System.out.println(System.getProperty("user.dir"));
   }
   
 }
