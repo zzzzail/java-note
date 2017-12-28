@@ -1,8 +1,10 @@
 package com.fsocity.security.browser.config;
 
 import com.fsocity.security.browser.config.support.SimpleResponse;
+import com.fsocity.security.core.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
@@ -29,6 +31,9 @@ public class BrowserSecurityController {
   
   private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
   
+  @Autowired
+  private SecurityProperties securityProperties;
+  
   /**
    * 当需要身份认证时跳转到这里
    * @param request
@@ -46,7 +51,8 @@ public class BrowserSecurityController {
       log.info("引发跳转的url: {}", target);
       
       if (StringUtils.endsWithIgnoreCase(target, ".html")) {
-        redirectStrategy.sendRedirect(request, response, "");
+        redirectStrategy.sendRedirect(request, response,
+          securityProperties.getBrowser().getLoginPage());
       }
     }
     
