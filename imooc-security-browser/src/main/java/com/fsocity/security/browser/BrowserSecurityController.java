@@ -1,6 +1,6 @@
-package com.fsocity.security.browser.config;
+package com.fsocity.security.browser;
 
-import com.fsocity.security.browser.config.support.SimpleResponse;
+import com.fsocity.security.browser.support.SimpleResponse;
 import com.fsocity.security.core.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;

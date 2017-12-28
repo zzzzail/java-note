@@ -16,7 +16,7 @@ security:
     enabled: false
 
 # 自己设定的配置
-imooc:
-  security:
-    browser:
-      login-page: /demo-signin.html
+#imooc:
+#  security:
+#    browser:
+#      login-page: /demo-signin.html

@@ -1,4 +1,4 @@
-package com.fsocity.security.browser.config.support;
+package com.fsocity.security.browser.support;
 
 import lombok.Data;
 
