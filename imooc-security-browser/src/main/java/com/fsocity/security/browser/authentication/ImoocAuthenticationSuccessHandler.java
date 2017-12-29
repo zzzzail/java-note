@@ -1,11 +1,14 @@
 package com.fsocity.security.browser.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fsocity.security.core.properties.LoginType;
+import com.fsocity.security.core.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -20,13 +23,16 @@ import java.io.IOException;
  */
 @Component("imoocAuthenticationSuccessHandler")
 @Slf4j
-public class ImoocAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class ImoocAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
   
   @Autowired
   private ObjectMapper objectMapper;
   
+  private SecurityProperties securityProperties;
+  
   /**
    * 登录成功后
+   *
    * @param request
    * @param response
    * @param authentication
@@ -39,8 +45,13 @@ public class ImoocAuthenticationSuccessHandler implements AuthenticationSuccessH
                                       Authentication authentication) throws IOException, ServletException {
     
     log.info("登录成功");
-  
-    response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-    response.getWriter().write(objectMapper.writeValueAsString(authentication));
+    
+    if (LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
+      response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+      response.getWriter().write(objectMapper.writeValueAsString(authentication));
+    } else {
+      super.onAuthenticationSuccess(request, response, authentication);
+    }
+    
   }
 }
