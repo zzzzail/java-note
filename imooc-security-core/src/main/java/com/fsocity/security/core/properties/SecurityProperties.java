@@ -1,5 +1,6 @@
 package com.fsocity.security.core.properties;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -18,5 +19,4 @@ public class SecurityProperties {
   public void setBrowser(BrowserProperties browser) {
     this.browser = browser;
   }
-
 }

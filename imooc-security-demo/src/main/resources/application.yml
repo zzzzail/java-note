@@ -9,14 +9,17 @@ spring:
   session:
       store-type: none
   jackson:
-    #  配置 JsonView 输出到浏览器是否带null值, always: 总是都带 non_null: 不带null值
+    # 配置 JsonView 输出到浏览器是否带null值, always: 总是都带 non_null: 不带null值
     default-property-inclusion: non_null
 security:
   basic:
+    # 是否开启安全认证
     enabled: false
 
 # 自己设定的配置
-#imooc:
-#  security:
-#    browser:
+imooc:
+  security:
+    browser:
 #      login-page: /demo-signin.html
+      loginType: REDIRECT
+

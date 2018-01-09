@@ -17,11 +17,13 @@
   </parent>
   
   <dependencies>
+    
     <dependency>
       <groupId>com.fsocity.security</groupId>
       <artifactId>imooc-security-browser</artifactId>
       <version>${imooc-security-browser.version}</version>
     </dependency>
+    
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>

@@ -27,15 +27,17 @@ public class MyUserdetailService implements UserDetailsService {
     
     // 处理用户信息获取逻辑: 根据用户名查找用户信息
     // 根据查找到的用户信息判断用户是否被冻结
-    String password = passwordEncoder.encode("pass");
+    String password = passwordEncoder.encode("123456");
+    
     log.info("用户的密码是: {}", password);
+    
     UserDetails userDetails = new User(
       username,
       password,
       true, // 账号是否可用
       true, // 账号是否过期
       true, // 是否需要更改密码
-      true, // 用户所动
+      true, // 账号是否锁定
       AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     
     return userDetails;

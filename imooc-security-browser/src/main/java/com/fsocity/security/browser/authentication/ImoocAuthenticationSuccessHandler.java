@@ -28,23 +28,18 @@ public class ImoocAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
   @Autowired
   private ObjectMapper objectMapper;
   
+  @Autowired
   private SecurityProperties securityProperties;
   
   /**
    * 登录成功后
-   *
-   * @param request
-   * @param response
-   * @param authentication
-   * @throws IOException
-   * @throws ServletException
    */
   @Override
   public void onAuthenticationSuccess(HttpServletRequest request,
                                       HttpServletResponse response,
                                       Authentication authentication) throws IOException, ServletException {
     
-    log.info("登录成功");
+    log.info("登录成功: type={}", securityProperties.getBrowser());
     
     if (LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
       response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);

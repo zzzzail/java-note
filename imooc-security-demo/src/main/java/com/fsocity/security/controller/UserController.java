@@ -6,6 +6,7 @@ import com.fsocity.security.condition.UserQueryCondition;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
@@ -22,6 +23,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+  
+  @GetMapping("/me")
+  public Object me() {
+    return SecurityContextHolder.getContext().getAuthentication();
+  }
   
   // @RequestMapping(value = "/user", method = RequestMethod.GET)
   // @GetMapping("/user")
