@@ -30,8 +30,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   private AuthenticationFailureHandler imoocAuthenticationFailureHandler;
   
-  private String loginPage = securityProperties.getBrowser().getLoginPage();
-  
   // 处理密码的加密解密
   @Bean
   public PasswordEncoder passwordEncoder() {
@@ -40,6 +38,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
   
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+  
+    String loginPage = securityProperties.getBrowser().getLoginPage();
     
     ValidateCodeFilter validateCodeFilter = new ValidateCodeFilter();
     validateCodeFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);

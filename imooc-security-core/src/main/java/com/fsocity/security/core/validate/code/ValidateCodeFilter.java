@@ -1,5 +1,6 @@
 package com.fsocity.security.core.validate.code;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -21,6 +22,7 @@ import java.io.IOException;
  * @author zail
  * @since 2018-01-09
  */
+@Slf4j
 public class ValidateCodeFilter extends OncePerRequestFilter {
   
   private AuthenticationFailureHandler authenticationFailureHandler;
@@ -41,11 +43,9 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
         return;
       }
     }
-    else {
-      // 调用后面的过滤器
-      filterChain.doFilter(request, response);
-    }
     
+    // 调用后面的过滤器
+    filterChain.doFilter(request, response);
   }
   
   /**
@@ -54,9 +54,11 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
    */
   private void validate(ServletWebRequest servletWebRequest) throws ServletRequestBindingException {
     
-    ImageCode codeInSession = (ImageCode) sessionStrategy.getAttribute(servletWebRequest, ValidateCodeFilter.ALREADY_FILTERED_SUFFIX);
+    ImageCode codeInSession = (ImageCode) sessionStrategy.getAttribute(servletWebRequest, ValidateController.SESSION_KEY);
     
     String codeInRequest = ServletRequestUtils.getRequiredStringParameter(servletWebRequest.getRequest(), "imageCode");
+    
+    log.info("请求验证码为: {}, session保存的验证码为: {}", codeInRequest, codeInSession.getCode());
     
     // 判断是否为空
     if (StringUtils.isBlank(codeInRequest)) throw new ValidateCodeException("验证码的值不能为为空");
@@ -64,7 +66,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
     if (codeInSession == null) throw new ValidateCodeException("验证码不存在");
     // 判断是否过期
     if (codeInSession.isExpired()) {
-      sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeFilter.ALREADY_FILTERED_SUFFIX);
+      sessionStrategy.removeAttribute(servletWebRequest, ValidateController.SESSION_KEY);
       throw new ValidateCodeException("验证码已过期");
     }
     // 判断是否匹配
@@ -72,7 +74,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
       throw new ValidateCodeException("验证码不匹配");
     }
     
-    sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeFilter.ALREADY_FILTERED_SUFFIX);
+    sessionStrategy.removeAttribute(servletWebRequest, ValidateController.SESSION_KEY);
     
   }
   

@@ -17,9 +17,9 @@ security:
     enabled: false
 
 # 自己设定的配置
-imooc:
-  security:
-    browser:
+#imooc:
+#  security:
+#    browser:
 #      login-page: /demo-signin.html
-      loginType: REDIRECT
+#      loginType: JSON
 

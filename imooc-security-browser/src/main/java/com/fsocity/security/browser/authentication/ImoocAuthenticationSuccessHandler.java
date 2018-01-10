@@ -39,12 +39,13 @@ public class ImoocAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
                                       HttpServletResponse response,
                                       Authentication authentication) throws IOException, ServletException {
     
-    log.info("登录成功: type={}", securityProperties.getBrowser());
+    log.info("登录成功: type={}, authentication={}", securityProperties.getBrowser(), authentication);
     
     if (LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
       response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
       response.getWriter().write(objectMapper.writeValueAsString(authentication));
-    } else {
+    }
+    else {
       super.onAuthenticationSuccess(request, response, authentication);
     }
     
