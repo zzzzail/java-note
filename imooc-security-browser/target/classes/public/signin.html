@@ -7,7 +7,6 @@
 <body>
 
 <h1>登录</h1>
-
 <form action="/authentication/form" method="post">
   <div>
     <input type="text" name="username" placeholder="用户名"/>
@@ -19,6 +18,25 @@
   <div>
     <img src="/code/image" alt="验证码"/>
     <input type="text" name="imageCode"/>
+  </div>
+  
+  <div>
+    <input type="checkbox" name="remember-me" value="true"/>
+    记住我
+  </div>
+  
+  <button type="submit">登录</button>
+</form>
+
+<h1>短信验证码登录</h1>
+<form action="/authentication/mobile" method="post">
+  <div>
+    <input type="text" name="mobile" value="18396800680" placeholder="手机号"/>
+  </div>
+  
+  <div>
+    <input type="text" name="smsCode"/>
+    <a href="/code/sms?mobile=18396800680">发送短信验证码</a>
   </div>
   
   <button type="submit">登录</button>

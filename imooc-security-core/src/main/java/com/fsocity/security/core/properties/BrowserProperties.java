@@ -6,25 +6,16 @@ import lombok.Data;
  * @author zail
  * @since 2017-12-28
  */
+@Data
 public class BrowserProperties {
   
   private String loginPage = "/signin.html";
   
   private LoginType loginType = LoginType.JSON;
   
-  public String getLoginPage() {
-    return loginPage;
-  }
+  /**
+   * token 过期时间, 默认一小时
+   */
+  private int rememberMeSeconds = 3600;
   
-  public void setLoginPage(String loginPage) {
-    this.loginPage = loginPage;
-  }
-  
-  public LoginType getLoginType() {
-    return loginType;
-  }
-  
-  public void setLoginType(LoginType loginType) {
-    this.loginType = loginType;
-  }
 }

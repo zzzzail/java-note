@@ -8,15 +8,17 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 2017-12-28
  */
 @ConfigurationProperties(prefix = "imooc.security")
+@Data
 public class SecurityProperties {
-
+  
+  /**
+   * 浏览器配置
+   */
   private BrowserProperties browser = new BrowserProperties();
   
-  public BrowserProperties getBrowser() {
-    return browser;
-  }
+  /**
+   * 验证码配置
+   */
+  private ValidateCodeProperties code = new ValidateCodeProperties();
   
-  public void setBrowser(BrowserProperties browser) {
-    this.browser = browser;
-  }
 }
