@@ -87,7 +87,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
       .and()
       
       .authorizeRequests()
-      .antMatchers("/authentication/*", loginPage, "/code/*")
+      .antMatchers("/authentication/require", loginPage, "/code/*")
       .permitAll() // 该路由不需要身份认证
       
       .anyRequest()
@@ -95,6 +95,5 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
       
       .and()
       .csrf().disable();
-    
   }
 }
