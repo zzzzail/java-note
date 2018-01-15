@@ -3,6 +3,7 @@ package com.fsocity.security.core.validate.code.impl;
 import com.fsocity.security.core.constant.UriConstant;
 import com.fsocity.security.core.validate.code.ValidateCodeGenerator;
 import com.fsocity.security.core.validate.code.ValidateCodeProcessor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
@@ -15,6 +16,7 @@ import java.util.Map;
  * @author zail
  * @since 2018-01-11
  */
+@Slf4j
 public abstract class AbstractValidateCodeProcessor<C> implements ValidateCodeProcessor {
   
   /**
@@ -50,6 +52,7 @@ public abstract class AbstractValidateCodeProcessor<C> implements ValidateCodePr
    * @param validateCode
    */
   private void save(ServletWebRequest request, C validateCode) {
+    log.info("存session中的名字是 {}", getProcessorType(request));
     sessionStrategy.setAttribute(request,
       SESSION_KEY_PREFIX + getProcessorType(request), validateCode);
   }
@@ -67,6 +70,7 @@ public abstract class AbstractValidateCodeProcessor<C> implements ValidateCodePr
    * @return
    */
   private String getProcessorType(ServletWebRequest request) {
-    return StringUtils.substringAfter(request.getRequest().getRequestURI(), UriConstant.VALIDATE_CODE_URI_PREFIX);
+    return StringUtils.substringAfter(request.getRequest().getRequestURI(),
+      UriConstant.VALIDATE_CODE_URI_PREFIX);
   }
 }

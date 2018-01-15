@@ -1,7 +1,10 @@
-package com.fsocity.security.core.validate.code;
+package com.fsocity.security.core.validate.code.sms;
 
 import com.fsocity.security.core.constant.UriConstant;
 import com.fsocity.security.core.properties.SecurityProperties;
+import com.fsocity.security.core.validate.code.ValidateCode;
+import com.fsocity.security.core.validate.code.ValidateCodeException;
+import com.fsocity.security.core.validate.code.ValidateCodeProcessor;
 import com.fsocity.security.core.validate.code.image.ImageCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -31,7 +34,7 @@ import java.util.Set;
  * @since 2018-01-09
  */
 @Slf4j
-public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {
+public class SmsCodeFilter extends OncePerRequestFilter implements InitializingBean {
   
   private AuthenticationFailureHandler authenticationFailureHandler;
   
@@ -47,12 +50,12 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
   @Override
   public void afterPropertiesSet() throws ServletException {
     super.afterPropertiesSet();
-    String[] configUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getImage().getUrl(), ",");
+    String[] configUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getSms().getUrl(), ",");
     for (String url: configUrls) {
       urls.add(url);
     }
     
-    urls.add("/authentication/form");
+    urls.add("/authentication/mobile");
   }
   
   @Override
@@ -87,11 +90,13 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
    * @param request
    */
   private void validate(ServletWebRequest request) throws ServletRequestBindingException {
-    String type = StringUtils.substringAfter(request.getRequest().getRequestURI(),
-      UriConstant.VALIDATE_CODE_URI_PREFIX);
+    String type = "sms";
     
-    ImageCode codeInSession = (ImageCode) sessionStrategy.getAttribute(request, ValidateCodeProcessor.SESSION_KEY_PREFIX + type);
-    String codeInRequest = ServletRequestUtils.getRequiredStringParameter(request.getRequest(), "imageCode");
+    ValidateCode codeInSession = (ValidateCode) sessionStrategy.getAttribute(request,
+      ValidateCodeProcessor.SESSION_KEY_PREFIX + type);
+    String codeInRequest = ServletRequestUtils.getRequiredStringParameter(request.getRequest(), "smsCode");
+    
+    log.info("从session中取的名字是 {}", type);
     
     // 判断是否为空
     if (StringUtils.isBlank(codeInRequest)) throw new ValidateCodeException("验证码的值不能为为空");

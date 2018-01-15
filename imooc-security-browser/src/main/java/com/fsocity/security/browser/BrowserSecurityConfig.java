@@ -1,8 +1,10 @@
 package com.fsocity.security.browser;
 
 import com.fsocity.security.browser.authentication.ImoocAuthenticationSuccessHandler;
+import com.fsocity.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import com.fsocity.security.core.properties.SecurityProperties;
 import com.fsocity.security.core.validate.code.ValidateCodeFilter;
+import com.fsocity.security.core.validate.code.sms.SmsCodeFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -49,6 +51,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   private UserDetailsService userDetailsService;
   
+  @Autowired
+  private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+  
   @Bean
   public PersistentTokenRepository persistentTokenRepository() {
     log.info("配置持久化token仓库.");
@@ -60,7 +65,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
   
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-  
+    
     String loginPage = securityProperties.getBrowser().getLoginPage();
     
     ValidateCodeFilter validateCodeFilter = new ValidateCodeFilter();
@@ -68,8 +73,14 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     validateCodeFilter.setSecurityProperties(securityProperties);
     validateCodeFilter.afterPropertiesSet();
     
+    SmsCodeFilter smsCodeFilter = new SmsCodeFilter();
+    smsCodeFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
+    smsCodeFilter.setSecurityProperties(securityProperties);
+    smsCodeFilter.afterPropertiesSet();
+    
     http
       // 把过滤器加到用户名密码校验过滤器的前面
+      .addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
       .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
       
       .formLogin()
@@ -94,6 +105,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
       .authenticated()
       
       .and()
-      .csrf().disable();
+      .csrf().disable()
+      
+      .apply(smsCodeAuthenticationSecurityConfig);
   }
 }
