@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class BrowserProperties {
   
-  private String loginPage = "/signin.html";
+  private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
   
   private LoginType loginType = LoginType.JSON;
   

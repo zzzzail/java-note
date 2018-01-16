@@ -15,4 +15,6 @@ public class ImageCodeProperties extends SmsCodeProperties {
   // 图片高度
   private int height = 23;
   
+  private String url = "";
+  
 }

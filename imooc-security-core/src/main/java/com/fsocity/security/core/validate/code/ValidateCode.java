@@ -28,7 +28,6 @@ public class ValidateCode {
   }
   
   /**
-   *
    * @param code
    * @param expireIn 设置多长时间之后过期, 单位秒
    */

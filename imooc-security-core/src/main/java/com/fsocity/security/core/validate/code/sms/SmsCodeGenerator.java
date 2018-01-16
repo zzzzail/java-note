@@ -5,6 +5,7 @@ import com.fsocity.security.core.validate.code.ValidateCode;
 import com.fsocity.security.core.validate.code.ValidateCodeGenerator;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.web.context.request.ServletWebRequest;
  * @author zail
  * @since 2018-01-11
  */
+@Component("smsValidateCodeGenerator")
 public class SmsCodeGenerator implements ValidateCodeGenerator {
   
   @Autowired
