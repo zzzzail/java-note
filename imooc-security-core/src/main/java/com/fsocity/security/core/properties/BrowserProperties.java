@@ -11,6 +11,8 @@ public class BrowserProperties {
   
   private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
   
+  private String signUpUrl = "/signup.html";
+  
   private LoginType loginType = LoginType.JSON;
   
   /**

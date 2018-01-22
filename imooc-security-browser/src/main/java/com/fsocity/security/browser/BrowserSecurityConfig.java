@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
@@ -55,6 +56,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
   @Autowired
   private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
   
+  @Autowired
+  private SpringSocialConfigurer imoocSocialSecurityConfig;
+  
   @Bean
   public PersistentTokenRepository persistentTokenRepository() {
     JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
@@ -76,6 +80,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
       .apply(smsCodeAuthenticationSecurityConfig)
       .and()
       
+      .apply(imoocSocialSecurityConfig)
+      .and()
+      
       // 记住我功能设置
       .rememberMe()
       .tokenRepository(persistentTokenRepository())
@@ -89,7 +96,10 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
         SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
         securityProperties.getBrowser().getLoginPage(),
         SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
-        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*")
+        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
+        securityProperties.getBrowser().getSignUpUrl(),
+        "/user/regist"
+      )
       .permitAll()
       .anyRequest()
       .authenticated()

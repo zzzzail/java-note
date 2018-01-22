@@ -4,14 +4,18 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fsocity.security.DTO.UserDTO;
 import com.fsocity.security.condition.UserQueryCondition;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.ServletWebRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+  
+  @Autowired
+  private ProviderSignInUtils providerSignInUtils;
+  
+  @GetMapping("/regist")
+  public void regist(UserDTO userDTO, HttpServletRequest request) {
+    // 不管是注册用户还是绑定用户, 都会拿到一个用户的唯一标识
+    String userId = userDTO.getId();
+    providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
+  }
   
   @GetMapping("/me")
   public Object me() {
