@@ -1,8 +1,6 @@
 package com.fsocity.learn.java.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
@@ -11,10 +9,8 @@ import java.util.Set;
  * @author zail
  * @since 2018-01-27
  */
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
-public class Student {
+public class Student implements Comparable<Student> {
   
   // 学生id
   private int id;
@@ -25,8 +21,14 @@ public class Student {
   // 课程
   private Set courses;
   
+  public Student() {}
+  
   public Student(int id, String name) {
     this.id = id;
     this.name = name;
+  }
+  
+  public int compareTo(Student o) {
+    return this.id - o.id;
   }
 }
