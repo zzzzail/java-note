@@ -39,8 +39,15 @@ public class MyTimer {
     /**
      * 和schedule一样是设置时间段执行, 每隔period时间执行一次
      */
-    myTimerTask.setName("timerTask04");
-    timer.scheduleAtFixedRate(myTimerTask, calendar.getTime(), 2000);
+    // myTimerTask.setName("timerTask04");
+    // timer.scheduleAtFixedRate(myTimerTask, calendar.getTime(), 2000);
+  
+    /**
+     * 和schedule一样
+     * 那区别是什么啊?
+     */
+    myTimerTask.setName("timerTask05");
+    timer.scheduleAtFixedRate(myTimerTask, 3000, 2000);
   }
 
 }
