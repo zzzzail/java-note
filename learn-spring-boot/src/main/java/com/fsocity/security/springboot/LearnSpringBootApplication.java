@@ -1,12 +1,12 @@
-package com.fsocity.security.learn_spring_boot;
+package com.fsocity.security.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class LearnSpringBootApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    SpringApplication.run(LearnSpringBootApplication.class, args);
   }
 }

@@ -1,4 +1,4 @@
-package com.fsocity.security.learn_spring_boot.cache;
+package com.fsocity.security.springboot.cache;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;

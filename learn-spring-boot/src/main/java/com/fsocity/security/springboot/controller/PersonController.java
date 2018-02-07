@@ -1,7 +1,7 @@
-package com.fsocity.security.learn_spring_boot.controller;
+package com.fsocity.security.springboot.controller;
 
-import com.fsocity.security.learn_spring_boot.entity.Person;
-import com.fsocity.security.learn_spring_boot.repository.PersonRepository;
+import com.fsocity.security.springboot.entity.Person;
+import com.fsocity.security.springboot.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

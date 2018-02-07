@@ -1,4 +1,4 @@
-package com.fsocity.security.learn_spring_boot.controller;
+package com.fsocity.security.springboot.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

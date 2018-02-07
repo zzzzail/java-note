@@ -1,4 +1,4 @@
-package com.fsocity.security.learn_spring_boot.controller;
+package com.fsocity.security.springboot.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

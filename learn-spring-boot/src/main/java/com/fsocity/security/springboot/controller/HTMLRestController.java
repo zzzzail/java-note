@@ -1,4 +1,4 @@
-package com.fsocity.security.learn_spring_boot.controller;
+package com.fsocity.security.springboot.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

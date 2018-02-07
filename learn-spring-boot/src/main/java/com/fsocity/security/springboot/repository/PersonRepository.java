@@ -1,6 +1,6 @@
-package com.fsocity.security.learn_spring_boot.repository;
+package com.fsocity.security.springboot.repository;
 
-import com.fsocity.security.learn_spring_boot.entity.Person;
+import com.fsocity.security.springboot.entity.Person;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.NoRepositoryBean;
 

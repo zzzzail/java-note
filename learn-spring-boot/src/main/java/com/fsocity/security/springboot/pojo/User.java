@@ -1,4 +1,4 @@
-package com.fsocity.security.learn_spring_boot.pojo;
+package com.fsocity.security.springboot.pojo;
 
 import org.springframework.hateoas.ResourceSupport;
 

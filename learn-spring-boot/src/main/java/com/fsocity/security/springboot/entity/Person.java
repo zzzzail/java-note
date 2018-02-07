@@ -1,4 +1,4 @@
-package com.fsocity.security.learn_spring_boot.entity;
+package com.fsocity.security.springboot.entity;
 
 import lombok.Data;
 
