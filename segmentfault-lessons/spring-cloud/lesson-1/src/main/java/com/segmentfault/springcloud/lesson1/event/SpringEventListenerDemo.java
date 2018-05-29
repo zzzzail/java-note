@@ -1,6 +1,5 @@
 package com.segmentfault.springcloud.lesson1.event;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
