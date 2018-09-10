@@ -1,8 +1,8 @@
-package TheArtOfJavaConcurrencyProgramming.Section1;
-
-import java.util.concurrent.SynchronousQueue;
+package TheArtOfJavaConcurrencyProgramming.Section01;
 
 /**
+ * 死锁
+ * 线程 t1 和 t2 形成了死锁
  * @author zail
  * @since 2018-07-22
  */

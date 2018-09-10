@@ -1,4 +1,4 @@
-package TheArtOfJavaConcurrencyProgramming.Section1;
+package TheArtOfJavaConcurrencyProgramming.Section01;
 
 /**
  * @author zail
