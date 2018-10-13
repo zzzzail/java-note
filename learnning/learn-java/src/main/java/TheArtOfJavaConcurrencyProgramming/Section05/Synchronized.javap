@@ -1,3 +1,5 @@
+> javap -v Synchronized.class
+
 Warning: Binary file Synchronized contains TheArtOfJavaConcurrencyProgramming.Section05.Synchronized
 Classfile /Users/zail/Workspace/Java/github.com/java-note/learnning/learn-java/target/classes/TheArtOfJavaConcurrencyProgramming/Section05/Synchronized.class
   Last modified Sep 10, 2018; size 642 bytes
