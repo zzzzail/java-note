@@ -13,13 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/freemarker")
 public class IndexController {
-  
-  private String viewPrefix = "";
-  
-  @GetMapping("/index")
-  public String index(Model model) {
-    model.addAttribute("username", "Hello, Freemarker!");
     
-    return "index";
-  }
+    private String viewPrefix = "";
+    
+    @GetMapping("/index")
+    public String index(Model model) {
+        model.addAttribute("username", "Hello, Freemarker!");
+        
+        return "index";
+    }
 }
