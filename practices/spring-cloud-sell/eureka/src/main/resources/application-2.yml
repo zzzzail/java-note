@@ -1,0 +1,17 @@
+server:
+  port: 8762
+
+spring:
+  application:
+    name: eureka
+
+eureka:
+  client:
+    service-url:
+      # 设置默认 zone
+      defaultZone: http://127.0.0.1:8761/eureka/
+    # 自带 eureka-client， 可以与另一个 eureka server 互相注册
+    register-with-eureka: true
+  server:
+    # 关闭自我保护。开发环境关闭， 生产环境不要关闭
+    enable-self-preservation: false

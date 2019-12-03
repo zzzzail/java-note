@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: client
+
+eureka:
+  client:
+    service-url:
+      # 向注册中心注册
+      defaultZone: http://127.0.0.1:8761/eureka/,http://127.0.0.1:8762/eureka/
+    # 自定义跳转链接
+    # instance:
+      # hostname: client-name

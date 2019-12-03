@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root!@#
+    url: jdbc:mysql://127.0.0.1/retail?characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  jackson:
+    # 配置解析json后不带null值
+    default-property-inclusion: non_null
+  redis:
+    host: 127.0.0.imp01
+    port: 6379
+server:
+  # 访问目录
+  context-path: /
