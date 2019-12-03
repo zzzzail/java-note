@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/xml")
 public class XMLController {
-    
-    @GetMapping(value = "/user", produces = MediaType.APPLICATION_XML_VALUE)
-    public User user() {
-        User user = new User();
-        user.setName("zail");
-        user.setAge(18);
-        return user;
-    }
-    
+
+  @GetMapping(value = "/user", produces = MediaType.APPLICATION_XML_VALUE)
+  public User user() {
+    User user = new User();
+    user.setName("zail");
+    user.setAge(18);
+    return user;
+  }
+
 }

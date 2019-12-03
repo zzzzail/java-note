@@ -12,23 +12,23 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/cache/person")
 public class PersonController {
-    
-    @Autowired
-    private PersonRepository personRepository;
-    
-    @PostMapping("/save")
-    public Person save(@RequestBody Person person) {
-        
-        personRepository.savePerson(person);
-        
-        return person;
-    }
-    
-    @GetMapping("/get/{id}")
-    public Person get(@PathVariable String id) {
-        System.out.println(id);
-        Person person = personRepository.findPerson(id);
-        return person;
-    }
-    
+
+  @Autowired
+  private PersonRepository personRepository;
+
+  @PostMapping("/save")
+  public Person save(@RequestBody Person person) {
+
+    personRepository.savePerson(person);
+
+    return person;
+  }
+
+  @GetMapping("/get/{id}")
+  public Person get(@PathVariable String id) {
+    System.out.println(id);
+    Person person = personRepository.findPerson(id);
+    return person;
+  }
+
 }

@@ -12,10 +12,10 @@ import org.springframework.data.repository.NoRepositoryBean;
  */
 @NoRepositoryBean
 public interface PersonRepository {
-    
-    @Cacheable(cacheNames = "persons")
-    Person findPerson(String id);
-    
-    boolean savePerson(Person person);
-    
+
+  @Cacheable(cacheNames = "persons")
+  Person findPerson(String id);
+
+  boolean savePerson(Person person);
+
 }

@@ -16,9 +16,9 @@ charset = utf-8
 # 2 space indentation
 [*.{java,xml,yml}]
 indent_style = space
-indent_size = 4
+indent_size = 2
 
 # Tab indentation
 [Makefile]
 indent_style = space
-indent_size = 4
+indent_size = 2

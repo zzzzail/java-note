@@ -21,22 +21,22 @@ import java.util.Map;
 @RequestMapping("/cache")
 @Slf4j
 public class CacheController {
-    
-    @Autowired
-    @Qualifier("simpleCacheManager")
-    private CacheManager simpleCacheManager;
-    
-    @PostMapping("/save")
-    public Map<String, Object> save(@RequestParam String key, @RequestParam String value) {
-        System.out.println(key);
-        System.out.println(value);
-        Cache cache = simpleCacheManager.getCache("cache-1");
-        cache.put(key, value);
-        
-        Map<String, Object> result = new HashMap<>();
-        result.put(key, value);
-        
-        return result;
-    }
-    
+
+  @Autowired
+  @Qualifier("simpleCacheManager")
+  private CacheManager simpleCacheManager;
+
+  @PostMapping("/save")
+  public Map<String, Object> save(@RequestParam String key, @RequestParam String value) {
+    System.out.println(key);
+    System.out.println(value);
+    Cache cache = simpleCacheManager.getCache("cache-1");
+    cache.put(key, value);
+
+    Map<String, Object> result = new HashMap<>();
+    result.put(key, value);
+
+    return result;
+  }
+
 }
