@@ -1,15 +1,7 @@
+env: dev222
+
 server:
   port: 8081
-
-spring:
-  application:
-    name: order
-
-eureka:
-  client:
-    # 向注册中心注册
-    service-url:
-      defaultZone: http://127.0.0.1:8761/eureka/
 
 # 设置 Ribbon 轮询规则
 product:

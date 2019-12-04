@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: order
+  
+  cloud:
+    config:
+      discovery:
+        enable: true
+        # config server 应用名
+        server-id: config
+      profile: dev
+
+eureka:
+  client:
+    # 向 eureka 注册中心注册
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/

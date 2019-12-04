@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: config
+  
+  cloud:
+    config:
+      server:
+        # git 配置地址
+        git:
+          uri: https://github.com/zzzzail/config-repository.git
+          username: 878773559@qq.com
+          password: myheart,,123
+
+eureka:
+  client:
+    # 向注册中心注册
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+
