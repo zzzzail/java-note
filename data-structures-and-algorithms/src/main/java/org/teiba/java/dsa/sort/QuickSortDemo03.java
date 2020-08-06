@@ -23,7 +23,7 @@ public class QuickSortDemo03 {
      * @param l   左指针
      * @param r   右指针
      */
-    public static void sortRecursion(Integer[] arr, int l, int r) {
+    private static void sortRecursion(Integer[] arr, int l, int r) {
         // 递归的结束条件
         if (l >= r) return;
         
