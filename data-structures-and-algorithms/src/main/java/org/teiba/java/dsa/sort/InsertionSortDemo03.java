@@ -1,16 +1,15 @@
 package org.teiba.java.dsa.sort;
 
-import java.util.Arrays;
-
 /**
  * @author zail
  */
 public class InsertionSortDemo03 {
     
     public static void main(String[] args) {
-        int[] arr = new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1};
-        sort(arr);
-        System.out.println(Arrays.toString(arr));
+        int N = 10_00_000;
+        Integer[] arr = SortTestHelper.generateRandomArray(N, 0, N);
+        SortTestHelper.testSort(InsertionSortDemo03.class, "sort", Integer[].class, arr);
+        // System.out.println(Arrays.toString(arr));
     }
     
     /**
@@ -21,7 +20,7 @@ public class InsertionSortDemo03 {
      *
      * @param arr
      */
-    public static void sort(int[] arr) {
+    public static void sort(Integer[] arr) {
         
         for (int i = 1; i < arr.length; i++) {
             
@@ -38,7 +37,7 @@ public class InsertionSortDemo03 {
             
             arr[j + 1] = val;
             
-            System.out.println("i=" + i + ":" + Arrays.toString(arr));
+            // System.out.println("i=" + i + ":" + Arrays.toString(arr));
         }
         
     }
