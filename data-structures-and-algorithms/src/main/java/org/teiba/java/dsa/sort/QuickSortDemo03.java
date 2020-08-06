@@ -11,7 +11,7 @@ public class QuickSortDemo03 {
         int N = 10_000_000;
         Integer[] arr = SortTestHelper.generateRandomArray(N, 0, N);
         SortTestHelper.testSort(QuickSortDemo03.class, "sort", Integer[].class, arr);
-        System.out.println(Arrays.toString(arr));
+        // System.out.println(Arrays.toString(arr));
     }
     
     public static void sort(Integer[] arr) {
