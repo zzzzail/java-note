@@ -42,6 +42,8 @@ public class QuickSortDemo03 {
      * @return 返回分区的节点
      */
     private static int partition(Integer[] arr, int l, int r) {
+        // 优化1：设置真随机种子
+        swap(arr, l, (int) (Math.random() * (r - l + 1) + l));
         // 把数组第一个元素作为分区点
         Integer v = arr[l];
         
