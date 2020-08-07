@@ -37,9 +37,9 @@ public class QuickSort3WaysDemo01 {
      * 将arr[l...r]分为<v; =v; >v三个部分
      * 之后分别对<v; >v两部分进行三路快速排序
      *
-     * @param arr
-     * @param l
-     * @param r
+     * @param arr 数组
+     * @param l   做指针
+     * @param r   右指针
      * @return
      */
     private static int[] partition(Integer[] arr, int l, int r) {
@@ -66,7 +66,6 @@ public class QuickSort3WaysDemo01 {
         }
         
         swap(arr, l, lt);
-        
         return new int[]{lt - 1, gt};
     }
     
