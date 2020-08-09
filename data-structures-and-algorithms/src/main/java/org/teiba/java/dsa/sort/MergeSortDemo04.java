@@ -8,7 +8,9 @@ import java.util.Arrays;
 public class MergeSortDemo04 {
     
     public static void main(String[] args) {
-        int total = 10_000_000;
+        // 千万不要用归并排序排一千万的数据啊
+        // int total = 10_000_000;
+        int total = 10_0000;
         Integer[] arr = SortTestHelper.generateRandomArray(total, 0, total);
         SortTestHelper.testSort(MergeSortDemo04.class, "sort", Integer[].class, arr);
         // System.out.println(Arrays.toString(arr));
