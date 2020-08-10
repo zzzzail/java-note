@@ -11,7 +11,7 @@ public class QuickSortDemo03 {
         int N = 10_000_000;
         Integer[] arr = SortTestHelper.generateRandomArray(N, 0, N);
         SortTestHelper.testSort(QuickSortDemo03.class, "sort", Integer[].class, arr);
-        // System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(arr));
     }
     
     public static void sort(Integer[] arr) {
@@ -52,9 +52,12 @@ public class QuickSortDemo03 {
      */
     private static int partition(Integer[] arr, int l, int r) {
         /**
-         * 优化1：设置真随机种子
-         *
+         * 优化1：设置一个合适的分区点
+         * 方法1：取数组中的中间节点
+         * 方法2：三数取中法。把数组中的第一个元素、最后一个元素和中间元素的值进行对比，取中间值作为分区点。
+         * 方法2：取数组中的随机元素
          */
+        // swap(arr, l, l + ((r - l) >> 1));
         swap(arr, l, (int) (Math.random() * (r - l + 1) + l));
         
         // 把数组第一个元素作为分区点

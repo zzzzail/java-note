@@ -4,7 +4,7 @@ package org.teiba.java.dsa.search;
  * @author zail
  * @date 2020/7/15
  */
-public class BinarySearchDemo {
+public class BinarySearchDemo01 {
     
     /**
      * 二分查找法
