@@ -19,4 +19,14 @@ public class HashTableDemo01 {
         
     }
     
+    public static int hash(String val) {
+        // return (
+        //     ("n" - "a") * 26 * 26 * 26
+        //         + ("i" - "a") * 26 * 26
+        //         + ("c" - "a") * 26
+        //         + ("e" - "a")
+        // ) / 78978;
+        return 0;
+    }
+    
 }
