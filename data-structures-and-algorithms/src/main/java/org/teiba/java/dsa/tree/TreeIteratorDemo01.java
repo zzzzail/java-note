@@ -6,13 +6,13 @@ package org.teiba.java.dsa.tree;
 public class TreeIteratorDemo01 {
     
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(1, null, null);
-        root.left = new TreeNode(2, null, null);
-        root.right = new TreeNode(3, null, null);
-        root.left.left = new TreeNode(4, null, null);
-        root.left.right = new TreeNode(5, null, null);
-        root.right.left = new TreeNode(6, null, null);
-        root.right.right = new TreeNode(7, null, null);
+        TreeNode root = new TreeNode(10, null, null);
+        root.left = new TreeNode(8, null, null);
+        root.right = new TreeNode(12, null, null);
+        root.left.left = new TreeNode(6, null, null);
+        root.left.right = new TreeNode(9, null, null);
+        root.right.left = new TreeNode(11, null, null);
+        root.right.right = new TreeNode(13, null, null);
         
         Tree tree = new Tree(root);
         System.out.println("-------------前序遍历");
@@ -38,6 +38,7 @@ public class TreeIteratorDemo01 {
     
     /**
      * 中序遍历
+     * 对于一个平衡的二叉查找树来说，中序遍历是是有序的
      *
      * @param root
      */
