@@ -1,4 +1,4 @@
-package org.teiba.java.dsa.trees;
+package org.teiba.java.dsa.tree;
 
 /**
  * @author zail

@@ -1,4 +1,4 @@
-package org.teiba.java.dsa.trees;
+package org.teiba.java.dsa.tree;
 
 /**
  * <p>平衡树在插入和删除的时候，会通过旋转操作将高度保持在logN。其中两款具有代表性的
