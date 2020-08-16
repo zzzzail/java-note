@@ -17,6 +17,21 @@ public class HeapSortDemo01 {
         }
     }
     
+    /**
+     * 堆排序
+     *
+     * @param arr
+     */
+    public static void sort(Integer[] arr) {
+        buildHeap(arr);
+        int k = arr.length;
+        while (k > 1) {
+            swap(arr, 1, k);
+            --k;
+            heapify(arr, k, 1);
+        }
+    }
+    
     private static void heapify(Integer[] arr, int n, int i) {
         while (true) {
             int maxPos = i;
