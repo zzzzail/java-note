@@ -72,7 +72,6 @@ public class MergeSortDemo04 {
         // i指向左开始位置；j指向右开始位置（mid + 1）
         int i = l, j = mid + 1;
         for (int k = l; k <= r; k++) {
-            
             if (i > mid) { // 如果左侧元素已经全部处理完成
                 arr[k] = aux[j - l];
                 j++;
