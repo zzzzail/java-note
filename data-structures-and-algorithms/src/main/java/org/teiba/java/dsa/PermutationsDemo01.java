@@ -8,7 +8,7 @@ package org.teiba.java.dsa;
 public class PermutationsDemo01 {
     
     public static void main(String[] args) {
-        int[] arr = new int[]{1, 2, 3, 4};
+        int[] arr = new int[]{1, 2, 3};
         printPermutations(arr, arr.length, arr.length);
     }
     
@@ -16,7 +16,7 @@ public class PermutationsDemo01 {
      * 对数组中的所有数字，以n个为一组进行全排列
      * int[] a = {1, 2, 3, 4};
      * printPermutations(a, 4, 4);
-     *
+     * <p>
      * 假设数组中存储的是1，2， 3...n。
      * f(1,2,...n) = {最后一位是1, f(n-1)} + {最后一位是2, f(n-1)} +...+{最后一位是n, f(n-1)}。
      * k = 0就是结束条件
@@ -35,17 +35,24 @@ public class PermutationsDemo01 {
         }
         
         for (int i = 0; i < k; i++) {
-            int t = arr[i];
-            arr[i] = arr[k - 1];
-            arr[k - 1] = t;
-            
+            swap(arr, i, k - 1);
             printPermutations(arr, n, k - 1);
-            
             // 把数组变回去
-            t = arr[i];
-            arr[i] = arr[k - 1];
-            arr[k - 1] = t;
+            swap(arr, i, k - 1);
         }
+    }
+    
+    /**
+     * 根据下标交换数组中两个元素的位置
+     *
+     * @param arr 原数组
+     * @param i1  下标1
+     * @param i2  下标2
+     */
+    private static void swap(int[] arr, int i1, int i2) {
+        int t = arr[i1];
+        arr[i1] = arr[i2];
+        arr[i2] = t;
     }
     
 }
