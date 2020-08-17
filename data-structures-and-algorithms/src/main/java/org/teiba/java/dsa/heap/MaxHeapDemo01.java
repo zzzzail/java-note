@@ -81,6 +81,24 @@ public class MaxHeapDemo01 {
             }
         }
         
+        public void shiftDown(int k) {
+            while (2 * k <= count) {
+                // 再循环中，data[k]和data[j]交换位置
+                int j = 2 * k;
+                // 有右子节点，并且右子节点比左子节点大
+                if (j + 1 <= count && data[j + 1].compareTo(data[j]) > 0) {
+                    j += 1;
+                }
+                // 如果k位置的元素比j位置的元素大，则结束循环
+                if (data[k].compareTo(data[j]) >= 0) {
+                    break;
+                }
+                // 交换位置
+                swap(data, k, j);
+                k = j;
+            }
+        }
+        
         /**
          * 交换位置
          *
