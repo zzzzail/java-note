@@ -9,6 +9,10 @@ package org.teiba.java.dsa.sort;
  */
 public class HeapSortDemo01 {
     
+    public static void main(String[] args) {
+        
+    }
+    
     // 建堆
     public static void buildHeap(Integer[] arr) {
         int n = arr.length;
