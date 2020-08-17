@@ -22,6 +22,11 @@ public class MaxHeapDemo01 {
             Integer i = maxHeap.extractMax();
             System.out.print(i + " ");
         }
+        System.out.println();
+        
+        Integer[] arr = new Integer[]{12, 2, 3, 4, 5, 6, 7, 8, 10};
+        MaxHeap<Integer> maxHeap1 = new MaxHeap<>(arr);
+        System.out.println(maxHeap1);
     }
     
     /**
@@ -42,6 +47,27 @@ public class MaxHeapDemo01 {
             data = (T[]) new Comparable[capacity + 1];
             this.capacity = capacity;
             this.count = 0;
+        }
+        
+        /**
+         * 把数组堆化
+         *
+         * @param arr
+         */
+        public MaxHeap(T[] arr) {
+            data = (T[]) new Comparable[arr.length + 1];
+            capacity = arr.length;
+            
+            // 把数组中的元素复制到data中
+            for (int i = 0; i < arr.length; i++) {
+                data[i + 1] = arr[i];
+            }
+            count = arr.length;
+            
+            // 从第一个不是叶子节点的节点开始自顶向下地堆化元素
+            for (int i = count / 2; i >= 1; i--) {
+                shiftDown(i);
+            }
         }
         
         /**
