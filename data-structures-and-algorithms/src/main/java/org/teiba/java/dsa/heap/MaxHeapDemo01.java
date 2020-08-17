@@ -14,7 +14,7 @@ public class MaxHeapDemo01 {
         System.out.println(maxHeap.size());
         
         for (int i = 0; i < n; i++) {
-            maxHeap.insert(Integer.valueOf((int) (Math.random() * n)));
+            maxHeap.insert((int) (Math.random() * n));
             System.out.println(maxHeap);
         }
     }
@@ -24,13 +24,13 @@ public class MaxHeapDemo01 {
      *
      * @param <T>
      */
-    static class MaxHeap<T extends Comparable<T>> {
+    static class MaxHeap<T extends Comparable> {
         // 存储数据
-        private T[] data;
+        protected T[] data;
         // 堆的容量
-        private int capacity;
+        protected int capacity;
         // 总数
-        private int count;
+        protected int count;
         
         public MaxHeap(int capacity) {
             // 因为数组存储堆数据，是从下标1开始的，所以这里要加1
