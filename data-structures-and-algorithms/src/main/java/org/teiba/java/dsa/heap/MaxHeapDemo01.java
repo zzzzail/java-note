@@ -9,13 +9,18 @@ import java.util.Arrays;
 public class MaxHeapDemo01 {
     
     public static void main(String[] args) throws Exception {
-        int n = 10;
+        int n = 100;
         MaxHeap<Integer> maxHeap = new MaxHeap<>(n);
         System.out.println(maxHeap.size());
         
         for (int i = 0; i < n; i++) {
             maxHeap.insert((int) (Math.random() * n));
             System.out.println(maxHeap);
+        }
+        
+        while (!maxHeap.isEmpty()) {
+            Integer i = maxHeap.extractMax();
+            System.out.print(i + " ");
         }
     }
     
@@ -69,6 +74,23 @@ public class MaxHeapDemo01 {
         }
         
         /**
+         * 取出堆顶元素
+         */
+        public T extractMax() {
+            if (count <= 0) {
+                return null;
+            }
+            
+            T t = data[1];
+            swap(data, 1, count);
+            data[count] = null;
+            count--;
+            shiftDown(1);
+            
+            return t;
+        }
+        
+        /**
          * 自底向上的堆化
          *
          * @param k
@@ -81,6 +103,11 @@ public class MaxHeapDemo01 {
             }
         }
         
+        /**
+         * 自顶向下堆化
+         *
+         * @param k
+         */
         public void shiftDown(int k) {
             while (2 * k <= count) {
                 // 再循环中，data[k]和data[j]交换位置
