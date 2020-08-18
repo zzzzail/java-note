@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class HeapSortDemo02 {
     
     public static void main(String[] args) {
-        int total = 9;
+        int total = 10;
         Integer[] arr = SortTestHelper.generateRandomArray(total, 0, total);
         System.out.println(Arrays.toString(arr));
         // TODO 有bug！！！
@@ -26,10 +26,11 @@ public class HeapSortDemo02 {
      */
     public static void sort(Integer[] arr) {
         heapify(arr);
+        
         // 当堆里只剩下一个元素的时候就不需要操作了
         for (int i = arr.length - 1; i > 0; i--) {
             swap(arr, 0, i);
-            shiftDown(arr, i - 1, 0);
+            shiftDown(arr, i, 0);
         }
     }
     
@@ -40,7 +41,10 @@ public class HeapSortDemo02 {
      */
     private static void heapify(Integer[] arr) {
         int n = arr.length;
-        for (int i = (n - 1) / 2; i >= 0; i--) {
+        // 注意，此时我们的堆是从0开始索引的
+        // 从(最后一个元素的索引-1)/2开始
+        // 最后一个元素的索引 = n-1
+        for (int i = (n - 1 - 1) / 2; i >= 0; i--) {
             shiftDown(arr, n, i);
         }
     }
@@ -56,7 +60,7 @@ public class HeapSortDemo02 {
         while (2 * k + 1 < n) {
             // 循环中交换k和j的位置
             int j = 2 * k + 1;
-            if (j + 1 <= n && arr[j + 1] > arr[j]) {
+            if (j + 1 < n && arr[j + 1] > arr[j]) {
                 j++;
             }
             if (arr[k] >= arr[j]) {
