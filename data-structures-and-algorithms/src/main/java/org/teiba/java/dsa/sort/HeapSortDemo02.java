@@ -7,6 +7,7 @@ import java.util.Arrays;
  * 1. 堆化数组
  * 从(最后元素的索引-1)/2开始，也就是 (n - 1 - 1) / 2，到0。自下往上比较大小，如果上面的小则交换
  * 2. 构建完的堆，堆顶就是这个堆中最大的元素。把下标0的元素与数组尾部的元素进行交换，然后把0位置的元素shiftDown
+ *
  * @author zail
  */
 public class HeapSortDemo02 {
@@ -70,7 +71,7 @@ public class HeapSortDemo02 {
             // 循环中交换k和j的位置
             int j = 2 * k + 1;
             if (j + 1 < n && arr[j + 1] > arr[j]) {
-                j++;
+                j += 1;
             }
             if (arr[k] >= arr[j]) {
                 break;
