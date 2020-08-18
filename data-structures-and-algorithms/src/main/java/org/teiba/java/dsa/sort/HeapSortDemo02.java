@@ -12,11 +12,12 @@ import java.util.Arrays;
 public class HeapSortDemo02 {
     
     public static void main(String[] args) {
-        int total = 10;
+        // 排序一千万的数据要 10244 毫秒
+        int total = 10_000_000;
         Integer[] arr = SortTestHelper.generateRandomArray(total, 0, total);
-        System.out.println(Arrays.toString(arr));
+        // System.out.println(Arrays.toString(arr));
         SortTestHelper.testSort(HeapSortDemo02.class, "sort", Integer[].class, arr);
-        System.out.println(Arrays.toString(arr));
+        // System.out.println(Arrays.toString(arr));
     }
     
     /**
