@@ -1,12 +1,40 @@
 package org.teiba.java.dsa.tree;
 
+import java.util.Date;
+
 /**
  * @author zail
  */
 public class BinarySearchTreeDemo02 {
     
     public static void main(String[] args) {
-    
+        BinarySearchTree tree = new BinarySearchTree();
+        tree.insert(4, new Date());
+        tree.insert(2, 2);
+        tree.insert(0, 0);
+        tree.insert(1, 1);
+        tree.insert(3, 3);
+        System.out.println(tree);
+        
+        boolean flag = tree.contain(10);
+        System.out.println(flag);
+        flag = tree.contain(4);
+        System.out.println(flag);
+        
+        flag = tree.containByRecursion(10);
+        System.out.println(flag);
+        flag = tree.containByRecursion(4);
+        System.out.println(flag);
+        
+        Object obj = tree.search(4);
+        System.out.println(obj);
+        obj = tree.search(10);
+        System.out.println(obj);
+        
+        obj = tree.searchByRecursion(4);
+        System.out.println(obj);
+        obj = tree.searchByRecursion(10);
+        System.out.println(obj);
     }
     
     static class BinarySearchTree {
@@ -37,8 +65,8 @@ public class BinarySearchTreeDemo02 {
             }
             else {
                 BinarySearchTreeNode root = head;
-                // insertByRecursion(root, newNode);
-                insertByLoop(root, newNode);
+                insertByRecursion(root, newNode);
+                // insertByLoop(root, newNode);
             }
             count++;
             
@@ -117,7 +145,79 @@ public class BinarySearchTreeDemo02 {
         public boolean isEmpty() {
             return count == 0;
         }
-    
+        
+        /**
+         * 判断是否包含key这个键的值
+         *
+         * @param key 主键
+         * @return 是否存在
+         */
+        public boolean contain(int key) {
+            BinarySearchTreeNode root = head;
+            while (root != null) {
+                if (key < root.key) { // 左边查找
+                    root = root.left;
+                }
+                else if (key > root.key) { // 右边查找
+                    root = root.right;
+                }
+                else { // key == root.key
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        public boolean containByRecursion(int key) {
+            BinarySearchTreeNode root = head;
+            return containByRecursion(root, key);
+        }
+        
+        private boolean containByRecursion(BinarySearchTreeNode root, int key) {
+            if (root == null)
+                return false;
+            
+            if (key < root.key)
+                return containByRecursion(root.left, key);
+            else if (key > root.key)
+                return containByRecursion(root.right, key);
+            else
+                return true;
+        }
+        
+        public Object search(int key) {
+            BinarySearchTreeNode root = head;
+            while (root != null) {
+                if (key < root.key) { // 左
+                    root = root.left;
+                }
+                else if (key > root.key) { // 右
+                    root = root.right;
+                }
+                else { // key == root.key
+                    return root.value;
+                }
+            }
+            
+            return null;
+        }
+        
+        public Object searchByRecursion(int key) {
+            return searchByRecursion(head, key);
+        }
+        
+        private Object searchByRecursion(BinarySearchTreeNode root, int key) {
+            if (root == null)
+                return null;
+            
+            if (key < root.key)
+                return searchByRecursion(root.left, key);
+            else if (key > root.key)
+                return searchByRecursion(root.right, key);
+            else
+                return root.value;
+        }
+        
         @Override
         public String toString() {
             return "BinarySearchTree{" +
@@ -142,14 +242,14 @@ public class BinarySearchTreeDemo02 {
             this.value = value;
             this.left = this.right = null;
         }
-    
+        
         @Override
         public String toString() {
             return "BinarySearchTreeNode{" +
                 "key=" + key +
                 ", value=" + value +
-                ", \nleft=" + left +
-                ", \tright=" + right +
+                ", left=" + left +
+                ", right=" + right +
                 '}';
         }
     }
