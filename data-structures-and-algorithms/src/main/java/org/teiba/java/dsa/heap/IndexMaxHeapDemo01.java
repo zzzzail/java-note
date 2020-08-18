@@ -1,6 +1,5 @@
 package org.teiba.java.dsa.heap;
 
-import javax.swing.*;
 import java.util.Arrays;
 
 /**
