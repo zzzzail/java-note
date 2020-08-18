@@ -11,7 +11,6 @@ public class HeapSortDemo02 {
         int total = 10;
         Integer[] arr = SortTestHelper.generateRandomArray(total, 0, total);
         System.out.println(Arrays.toString(arr));
-        // TODO 有bug！！！
         SortTestHelper.testSort(HeapSortDemo02.class, "sort", Integer[].class, arr);
         System.out.println(Arrays.toString(arr));
     }
