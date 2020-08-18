@@ -1,5 +1,6 @@
 package org.teiba.java.dsa.heap;
 
+import javax.swing.*;
 import java.util.Arrays;
 
 /**
@@ -17,6 +18,8 @@ public class IndexMaxHeapDemo01 {
         protected T[] data;
         // 索引
         protected int[] indexes;
+        // 利用反向查找的方法解决change方法复杂度高的问题, rev中存储的是该下标的元素在索引数组中的位置
+        protected int[] reverse;
         // 堆的容量
         protected int capacity;
         // 总数
@@ -26,6 +29,9 @@ public class IndexMaxHeapDemo01 {
             // 因为数组存储堆数据，是从下标1开始的，所以这里要加1
             data = (T[]) new Comparable[capacity + 1];
             indexes = new int[capacity + 1];
+            reverse = new int[capacity + 1];
+            // 初始化为0表示i索引在堆中不存在
+            Arrays.fill(reverse, 0);
             this.capacity = capacity;
             this.count = 0;
         }
@@ -67,6 +73,8 @@ public class IndexMaxHeapDemo01 {
             i += 1;
             data[i] = t;
             indexes[count + 1] = i; // 索引里存储的是data的索引
+            reverse[i] = count + 1;
+            
             count++;
             shiftUp(count);
             
@@ -83,6 +91,8 @@ public class IndexMaxHeapDemo01 {
             
             T t = data[indexes[1]];
             swap(indexes, 1, count);
+            reverse[indexes[1]] = 1;
+            reverse[indexes[count]] = 0;
             data[count] = null;
             count--;
             shiftDown(1);
@@ -100,6 +110,8 @@ public class IndexMaxHeapDemo01 {
             
             int t = indexes[1] - 1;
             swap(indexes, 1, count);
+            reverse[indexes[1]] = 1;
+            reverse[indexes[count]] = 0;
             data[count] = null;
             count--;
             shiftDown(1);
@@ -114,6 +126,10 @@ public class IndexMaxHeapDemo01 {
          * @return
          */
         public T getData(int i) {
+            if (!contain(i)) {
+                return null;
+            }
+            
             return data[i + 1];
         }
         
@@ -124,18 +140,42 @@ public class IndexMaxHeapDemo01 {
          * @param t 新元素
          */
         public void change(int i, T t) {
+            // 检查i防止数组越界
+            if (!contain(i)) {
+                return;
+            }
+            
             i += 1;
             data[i] = t;
             
             // 找到indexes[j] = i, j表示data[i]在堆中的位置
             // 之后shiftUp(j)，再shiftDown(j)即可
-            for (int j = 0; j < count; j++) {
-                if (indexes[j] == i) {
-                    shiftUp(j);
-                    shiftDown(j);
-                    return;
-                }
+            // for (int j = 0; j < count; j++) {
+            //     if (indexes[j] == i) {
+            //         shiftUp(j);
+            //         shiftDown(j);
+            //         return;
+            //     }
+            // }
+            
+            // 修改之后
+            int j = reverse[i];
+            shiftUp(j);
+            shiftDown(j);
+        }
+        
+        /**
+         * 数据中是否包含i
+         *
+         * @param i
+         * @return
+         */
+        private boolean contain(int i) {
+            // 检查i是否越界
+            if (i + 1 < 1 && i + 1 > capacity) {
+                return false;
             }
+            return reverse[i + 1] == 0;
         }
         
         /**
@@ -147,6 +187,8 @@ public class IndexMaxHeapDemo01 {
             // 比k的父节点大，k的取值最大是2（k=1是根节点不需要再向上进行比较了）
             while (k > 1 && data[indexes[k]].compareTo(data[indexes[k / 2]]) > 0) {
                 swap(indexes, k, k / 2);
+                reverse[indexes[k / 2]] = k / 2;
+                reverse[indexes[k]] = k;
                 k /= 2;
             }
         }
@@ -170,6 +212,8 @@ public class IndexMaxHeapDemo01 {
                 }
                 // 交换位置
                 swap(indexes, k, j);
+                reverse[indexes[k]] = k;
+                reverse[indexes[j]] = j;
                 k = j;
             }
         }
