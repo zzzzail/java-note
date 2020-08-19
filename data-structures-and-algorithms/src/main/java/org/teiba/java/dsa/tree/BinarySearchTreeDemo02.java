@@ -359,28 +359,149 @@ public class BinarySearchTreeDemo02 {
          * @return
          */
         public int minimum() {
-            BinarySearchTreeNode root = head;
-            return minimum(root);
+            if (count == 0) return -1;
+            
+            BinarySearchTreeNode root = minimum(head);
+            return root.key;
         }
         
-        private int minimum(BinarySearchTreeNode root) {
+        private BinarySearchTreeNode minimum(BinarySearchTreeNode root) {
             if (root.left == null) {
-                return root.key;
+                return root;
             }
             
             return minimum(root.left);
         }
         
         public int max() {
-            BinarySearchTreeNode root = head;
-            return max(root);
+            if (count == 0) return -1;
+            
+            BinarySearchTreeNode root = max(head);
+            return root.key;
         }
         
-        private int max(BinarySearchTreeNode root) {
+        private BinarySearchTreeNode max(BinarySearchTreeNode root) {
             if (root.right == null) {
-                return root.key;
+                return root;
             }
             return max(root.right);
+        }
+        
+        /**
+         * 从二叉树中删除最小值的节点
+         */
+        public void removeMin() {
+            if (head != null) {
+                BinarySearchTreeNode node = removeMin(head);
+            }
+        }
+        
+        /**
+         * 删除掉以root为根的二分搜索树中的最小节点
+         * 返回删除节点后新的二分搜索树的根
+         *
+         * @param root
+         * @return
+         */
+        private BinarySearchTreeNode removeMin(BinarySearchTreeNode root) {
+            if (root.left == null) {
+                // 如果相应的右节点存在，右节点要代替要删除的节点，并成为二分搜索树的根
+                BinarySearchTreeNode rightNode = root.right;
+                root.right = null;
+                count--;
+                return rightNode;
+            }
+            
+            root.left = removeMin(root.left);
+            return root;
+        }
+        
+        public void removeMax() {
+            if (head != null) {
+                BinarySearchTreeNode node = removeMax(head);
+            }
+        }
+        
+        /**
+         * 删除掉以root为根的二分搜索树中的最大节点
+         * 返回删除节点后新的二分搜索树的根
+         *
+         * @param root
+         * @return
+         */
+        private BinarySearchTreeNode removeMax(BinarySearchTreeNode root) {
+            if (root.right == null) {
+                BinarySearchTreeNode leftNode = root.left;
+                root.left = null;
+                count--;
+                return leftNode;
+            }
+            
+            root.right = removeMax(root.right);
+            return root;
+        }
+        
+        /**
+         * 删除键为key的节点
+         *
+         * @param key
+         */
+        public void remove(int key) {
+            remove(head, key);
+        }
+        
+        /**
+         * 删除以root为根的二分搜索树中键值为key的节点
+         * 返回删除节点后新的二分搜索树的根
+         *
+         * @param root
+         * @param key
+         * @return
+         */
+        private BinarySearchTreeNode remove(BinarySearchTreeNode root, int key) {
+            // 没有要查找的节点
+            if (root == null) {
+                return null;
+            }
+            
+            if (key < root.key) {
+                root.left = remove(root.left, key);
+                return root;
+            }
+            else if (key > root.key) {
+                root.right = remove(root.right, key);
+                return root;
+            }
+            else { // key == root.key
+                // 如果只有右子节点的话
+                if (root.left == null) {
+                    BinarySearchTreeNode rightNode = root.right;
+                    root.right = null;
+                    count--;
+                    return root.right;
+                }
+                // 如果只有左子节点
+                if (root.right == null) {
+                    BinarySearchTreeNode leftNode = root.left;
+                    root.left = null;
+                    count--;
+                    return root.left;
+                }
+                // root的左右子节点都不为空
+                // 找到要比删除节点大的最小节点， 即待删除节点右子树的最小节点
+                // 用这个节点顶替待删除节点的位置
+                BinarySearchTreeNode successor = new BinarySearchTreeNode(minimum(root.right));
+                count++;
+                
+                successor.right = removeMin(root.right);
+                successor.left = root.left;
+                
+                root.left = root.right = null;
+                count--;
+                
+                return successor;
+            }
+            
         }
         
         @Override
@@ -408,6 +529,13 @@ public class BinarySearchTreeDemo02 {
             this.key = key;
             this.value = value;
             this.left = this.right = null;
+        }
+        
+        public BinarySearchTreeNode(BinarySearchTreeNode node) {
+            this.key = node.key;
+            this.value = node.value;
+            this.left = node.left;
+            this.right = node.right;
         }
         
         @Override
