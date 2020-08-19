@@ -49,9 +49,12 @@ public class BinarySearchTreeDemo02 {
         // System.out.println(tree);
         System.out.println("------- level order -------");
         tree.levelOrder();
-    
+        
         System.out.println("------- level2 order -------");
         tree.levelOrder2();
+        
+        System.out.println("最小值：" + tree.minimum());
+        System.out.println("最大值：" + tree.max());
     }
     
     static class BinarySearchTree {
@@ -328,7 +331,7 @@ public class BinarySearchTreeDemo02 {
                 }
             }
         }
-    
+        
         /**
          * 层序遍历（广度优先的遍历）
          * 需要引入一个队列
@@ -340,7 +343,7 @@ public class BinarySearchTreeDemo02 {
             while (!queue.isEmpty()) {
                 BinarySearchTreeNode node = queue.poll();
                 System.out.println(node.key);
-    
+                
                 if (node.left != null) {
                     queue.offer(node.left);
                 }
@@ -350,6 +353,36 @@ public class BinarySearchTreeDemo02 {
             }
         }
         
+        /**
+         * 树中的最小值
+         *
+         * @return
+         */
+        public int minimum() {
+            BinarySearchTreeNode root = head;
+            return minimum(root);
+        }
+        
+        private int minimum(BinarySearchTreeNode root) {
+            if (root.left == null) {
+                return root.key;
+            }
+            
+            return minimum(root.left);
+        }
+        
+        public int max() {
+            BinarySearchTreeNode root = head;
+            return max(root);
+        }
+        
+        private int max(BinarySearchTreeNode root) {
+            if (root.right == null) {
+                return root.key;
+            }
+            return max(root.right);
+        }
+        
         @Override
         public String toString() {
             return "BinarySearchTree{" +
@@ -357,6 +390,8 @@ public class BinarySearchTreeDemo02 {
                 ", count=" + count +
                 '}';
         }
+        
+        
     }
     
     static class BinarySearchTreeNode {
