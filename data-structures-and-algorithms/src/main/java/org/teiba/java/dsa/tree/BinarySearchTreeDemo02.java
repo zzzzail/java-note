@@ -1,6 +1,8 @@
 package org.teiba.java.dsa.tree;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * @author zail
@@ -42,9 +44,14 @@ public class BinarySearchTreeDemo02 {
         tree.inOrder();
         System.out.println("------- post order -------");
         tree.postOrder();
+        
+        // tree.destroy();
+        // System.out.println(tree);
+        System.out.println("------- level order -------");
+        tree.levelOrder();
     
-        tree.destroy();
-        System.out.println(tree);
+        System.out.println("------- level2 order -------");
+        tree.levelOrder2();
     }
     
     static class BinarySearchTree {
@@ -279,7 +286,7 @@ public class BinarySearchTreeDemo02 {
         public void destroy() {
             destroy(head);
         }
-    
+        
         private void destroy(BinarySearchTreeNode node) {
             if (node != null) {
                 destroy(node.left);
@@ -287,6 +294,59 @@ public class BinarySearchTreeDemo02 {
                 
                 node = null;
                 count--;
+            }
+        }
+        
+        /**
+         * 层序遍历（广度优先的遍历）
+         * 需要引入一个队列
+         */
+        public void levelOrder() {
+            // 申请一个队列
+            Queue<BinarySearchTreeNode> queue = new LinkedList<>();
+            queue.offer(head);
+            Queue<BinarySearchTreeNode> curLevelNodes = new LinkedList<>();
+            
+            // 第一层遍历，如果队列为空了，则结束循环
+            while (!queue.isEmpty()) {
+                // 取出元素
+                BinarySearchTreeNode node = queue.poll();
+                System.out.println(node.key);
+                curLevelNodes.offer(node);
+                
+                // 如果队列中没有内容了，则说明当前层遍历完成
+                if (queue.isEmpty()) {
+                    while (!curLevelNodes.isEmpty()) {
+                        BinarySearchTreeNode curNode = curLevelNodes.poll();
+                        if (curNode.left != null) {
+                            queue.offer(curNode.left);
+                        }
+                        if (curNode.right != null) {
+                            queue.offer(curNode.right);
+                        }
+                    }
+                }
+            }
+        }
+    
+        /**
+         * 层序遍历（广度优先的遍历）
+         * 需要引入一个队列
+         */
+        public void levelOrder2() {
+            Queue<BinarySearchTreeNode> queue = new LinkedList<>();
+            queue.offer(head);
+            
+            while (!queue.isEmpty()) {
+                BinarySearchTreeNode node = queue.poll();
+                System.out.println(node.key);
+    
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
             }
         }
         
