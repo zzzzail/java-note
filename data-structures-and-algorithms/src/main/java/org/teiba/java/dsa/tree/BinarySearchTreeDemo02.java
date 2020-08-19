@@ -35,6 +35,16 @@ public class BinarySearchTreeDemo02 {
         System.out.println(obj);
         obj = tree.searchByRecursion(10);
         System.out.println(obj);
+        
+        System.out.println("------- pre order -------");
+        tree.preOrder();
+        System.out.println("------- in order -------");
+        tree.inOrder();
+        System.out.println("------- post order -------");
+        tree.postOrder();
+    
+        tree.destroy();
+        System.out.println(tree);
     }
     
     static class BinarySearchTree {
@@ -216,6 +226,68 @@ public class BinarySearchTreeDemo02 {
                 return searchByRecursion(root.right, key);
             else
                 return root.value;
+        }
+        
+        /**
+         * 前序遍历
+         */
+        public void preOrder() {
+            preOrder(head);
+        }
+        
+        private void preOrder(BinarySearchTreeNode node) {
+            if (node != null) {
+                System.out.println(node.key);
+                preOrder(node.left);
+                preOrder(node.right);
+            }
+        }
+        
+        /**
+         * 中序遍历
+         */
+        public void inOrder() {
+            inOrder(head);
+        }
+        
+        private void inOrder(BinarySearchTreeNode node) {
+            if (node != null) {
+                inOrder(node.left);
+                System.out.println(node.key);
+                inOrder(node.right);
+            }
+        }
+        
+        /**
+         * 后序遍历
+         */
+        public void postOrder() {
+            postOrder(head);
+        }
+        
+        private void postOrder(BinarySearchTreeNode node) {
+            if (node != null) {
+                postOrder(node.left);
+                postOrder(node.right);
+                System.out.println(node.key);
+            }
+        }
+        
+        /**
+         * 清空对象
+         */
+        public void destroy() {
+            destroy(head);
+        }
+    
+        private void destroy(BinarySearchTreeNode node) {
+            if (node != null) {
+                destroy(node.left);
+                destroy(node.right);
+                
+                node = null;
+                count--;
+            }
         }
         
         @Override
