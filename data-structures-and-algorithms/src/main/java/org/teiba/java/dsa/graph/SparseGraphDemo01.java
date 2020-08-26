@@ -1,6 +1,7 @@
 package org.teiba.java.dsa.graph;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,11 +13,21 @@ import java.util.List;
 public class SparseGraphDemo01 {
     
     public static void main(String[] args) {
-        SparseGraph sg = new SparseGraph(100, false);
-        sg.addEdge(1, 2);
-        sg.addEdge(2, 3);
-        sg.addEdge(3, 4);
+        int n = 10000;
+        SparseGraph sg = new SparseGraph(n, false);
+        for (int i = 0; i < n; i++) {
+            sg.addEdge((int) (Math.random() * n), (int) (Math.random() * n));
+        }
         System.out.println(sg);
+        
+        for (int i = 0; i < sg.m; i++) {
+            System.out.print(i + "的边有：");
+            Iterator<Integer> itr = sg.iterator(i);
+            while (itr.hasNext()) {
+                System.out.print(itr.next() + ", ");
+            }
+            System.out.println();
+        }
     }
     
     static class SparseGraph {
@@ -64,10 +75,12 @@ public class SparseGraphDemo01 {
             if (hasEdge(v, w)) return;
             
             this.g.get(v).add(w);
+            // 判断v是不是自环边，如果是，则无需w与v连接
             // 如果是无向图
-            if (!directed) {
+            if (v != w && !directed) {
                 this.g.get(w).add(v);
             }
+            m++;
         }
         
         /**
@@ -78,7 +91,14 @@ public class SparseGraphDemo01 {
          * @return 布尔值
          */
         public boolean hasEdge(int v, int w) {
+            assert v >= 0 && v < n;
+            assert w >= 0 && w < n;
+            
             return this.g.get(v).contains(w);
+        }
+        
+        public Iterator<Integer> iterator(int v) {
+            return this.g.get(v).iterator();
         }
         
         @Override
@@ -90,6 +110,7 @@ public class SparseGraphDemo01 {
                 ", g=" + g +
                 '}';
         }
+        
     }
     
 }
