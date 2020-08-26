@@ -1,6 +1,8 @@
 package org.teiba.java.dsa.graph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -10,6 +12,21 @@ import java.util.List;
  * @author zail
  */
 public class DenseGraphDemo01 {
+    
+    public static void main(String[] args) {
+        int n = 10;
+        DenseGraph dg = create(n, false);
+        System.out.println(dg);
+    }
+    
+    public static DenseGraph create(int n, boolean directed) {
+        DenseGraph dg = new DenseGraph(n, directed);
+        // 随机填充数据
+        for (int i = 0; i < n; i++) {
+            dg.addEdge((int) (Math.random() * n), (int) (Math.random() * n));
+        }
+        return dg;
+    }
     
     static class DenseGraph {
         // 节点数
@@ -28,11 +45,14 @@ public class DenseGraphDemo01 {
             this.g = new ArrayList<>(n);
             for (int i = 0; i < n; i++) {
                 List<Boolean> list = new ArrayList<>(n);
+                for (int j = 0; j < n; j++) {
+                    list.add(false);
+                }
                 this.g.add(list);
             }
         }
         
-        // 返回有多少个定点
+        // 返回有多少个顶点
         public int V() {
             return n;
         }
@@ -70,6 +90,23 @@ public class DenseGraphDemo01 {
             assert w >= 0 && w < n;
             
             return g.get(v).get(w);
+        }
+        
+        public Boolean get(int v, int w) {
+            assert v >= 0 && v < n;
+            assert w >= 0 && w < n;
+            
+            return g.get(v).get(w);
+        }
+        
+        @Override
+        public String toString() {
+            return "DenseGraph{" +
+                "n=" + n +
+                ", m=" + m +
+                ", directed=" + directed +
+                ", g=" + g +
+                '}';
         }
     }
     

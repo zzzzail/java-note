@@ -13,13 +13,10 @@ import java.util.List;
 public class SparseGraphDemo01 {
     
     public static void main(String[] args) {
-        int n = 10000;
-        SparseGraph sg = new SparseGraph(n, false);
-        for (int i = 0; i < n; i++) {
-            sg.addEdge((int) (Math.random() * n), (int) (Math.random() * n));
-        }
+        int n = 100_000;
+        SparseGraph sg = create(n, false);
         System.out.println(sg);
-        
+        System.out.println("-----------------------");
         for (int i = 0; i < sg.m; i++) {
             System.out.print(i + "的边有：");
             Iterator<Integer> itr = sg.iterator(i);
@@ -28,6 +25,14 @@ public class SparseGraphDemo01 {
             }
             System.out.println();
         }
+    }
+    
+    public static SparseGraph create(int n, boolean directed) {
+        SparseGraph sg = new SparseGraph(n, directed);
+        for (int i = 0; i < n; i++) {
+            sg.addEdge((int) (Math.random() * n), (int) (Math.random() * n));
+        }
+        return sg;
     }
     
     static class SparseGraph {
