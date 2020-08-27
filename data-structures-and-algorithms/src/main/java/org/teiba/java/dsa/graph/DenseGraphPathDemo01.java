@@ -78,17 +78,18 @@ public class DenseGraphPathDemo01 {
             
             Queue<Integer> queue = new LinkedList<>();
             queue.offer(v);
+            visited[v] = true;
             
             while (!queue.isEmpty()) {
                 Integer cur = queue.poll();
-                visited[cur] = true;
                 // 接下来把顶点直接能到达的路径全部加入到队列中
                 List<Boolean> curNode = dg.get(cur);
                 for (int i = 0; i < curNode.size(); i++) {
                     if (curNode.get(i)) {
                         // 如果顶点没有被访问过并且队列中也没有该顶点
-                        if (!visited[i] && !queue.contains(i)) {
+                        if (!visited[i]) {
                             queue.offer(i);
+                            visited[i] = true;
                             from[i] = cur;
                         }
                     }
