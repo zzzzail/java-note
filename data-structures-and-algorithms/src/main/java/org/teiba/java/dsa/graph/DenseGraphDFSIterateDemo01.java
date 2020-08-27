@@ -17,12 +17,14 @@ public class DenseGraphDFSIterateDemo01 {
         Component component1 = new Component(dg);
         component1.calculateComponent();
         System.out.println(component1);
+        System.out.println(component1.isConnected(1, 2));
         
         n = 10;
         dg = DenseGraphDemo01.create(n, false);
         Component component2 = new Component(dg);
         component2.calculateComponent();
         System.out.println(component2);
+        System.out.println(component2.isConnected(1, 2));
     }
     
     static class Component {
@@ -82,7 +84,22 @@ public class DenseGraphDFSIterateDemo01 {
         public int count() {
             return this.componentCount;
         }
-    
+        
+        /**
+         * 判断v节点和w节点是否相连
+         *
+         * @param v v节点下标
+         * @param w w节点下标
+         * @return
+         */
+        public boolean isConnected(int v, int w) {
+            // 检查下标是否越界
+            assert v >= 0 && v < dg.V() : "下标越界了！";
+            assert w >= 0 && w < dg.V() : "下标越界了！";
+            
+            return componentIds[v] == componentIds[w];
+        }
+        
         @Override
         public String toString() {
             return "Component{" +
