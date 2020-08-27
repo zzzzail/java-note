@@ -102,19 +102,31 @@ public class SparseGraphDemo01 {
             return this.g.get(v).contains(w);
         }
         
+        public LinkedList<Integer> get(int v) {
+            return g.get(v);
+        }
+        
         public Iterator<Integer> iterator(int v) {
             return this.g.get(v).iterator();
         }
         
         @Override
         public String toString() {
-            return "SparseGraph{" +
+            StringBuilder str = new StringBuilder("SparseGraph{" +
                 "n=" + n +
                 ", m=" + m +
                 ", directed=" + directed +
-                ", g=" + g +
-                '}';
+                ", g=[\n");
+            for (int i = 0; i < g.size(); i++) {
+                str.append(i)
+                    .append(": ")
+                    .append(g.get(i).toString())
+                    .append("\n");
+            }
+            str.append("\n]}");
+            return str.toString();
         }
+        
         
     }
     
