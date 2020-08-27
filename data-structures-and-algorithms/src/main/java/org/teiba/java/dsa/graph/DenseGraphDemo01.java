@@ -92,6 +92,10 @@ public class DenseGraphDemo01 {
             return g.get(v).get(w);
         }
         
+        public List<Boolean> get(int v) {
+            return g.get(v);
+        }
+        
         public Boolean get(int v, int w) {
             assert v >= 0 && v < n;
             assert w >= 0 && w < n;
@@ -101,12 +105,23 @@ public class DenseGraphDemo01 {
         
         @Override
         public String toString() {
-            return "DenseGraph{" +
+            StringBuilder str = new StringBuilder("DenseGraph{" +
                 "n=" + n +
                 ", m=" + m +
                 ", directed=" + directed +
-                ", g=" + g +
-                '}';
+                ", g=[\n");
+            for (List<Boolean> bls : g) {
+                StringBuilder appendStr = new StringBuilder();
+                appendStr.append("[");
+                for (Boolean bl : bls) {
+                    appendStr
+                        .append(bl ? "1" : "0")
+                        .append(", ");
+                }
+                str.append(appendStr.append("]\n").toString());
+            }
+            str.append("]}");
+            return str.toString();
         }
     }
     

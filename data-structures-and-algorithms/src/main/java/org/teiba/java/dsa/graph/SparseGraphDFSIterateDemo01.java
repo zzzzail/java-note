@@ -3,6 +3,8 @@ package org.teiba.java.dsa.graph;
 import java.util.Iterator;
 
 /**
+ * 稀疏图的深度优先遍历
+ *
  * @author zail
  */
 public class SparseGraphDFSIterateDemo01 {
