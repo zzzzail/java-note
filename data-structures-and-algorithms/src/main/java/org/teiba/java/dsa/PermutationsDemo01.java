@@ -1,6 +1,7 @@
 package org.teiba.java.dsa;
 
 /**
+ * TODO 还没有搞懂这个
  * 全排列问题
  *
  * @author zail

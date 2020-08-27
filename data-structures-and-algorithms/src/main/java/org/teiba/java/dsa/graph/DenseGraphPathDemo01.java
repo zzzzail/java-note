@@ -1,9 +1,8 @@
 package org.teiba.java.dsa.graph;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import sun.awt.image.ImageWatched;
+
+import java.util.*;
 
 /**
  * @author zail
@@ -44,8 +43,10 @@ public class DenseGraphPathDemo01 {
             }
             
             // 寻路算法
-            // 从s开始深度优先遍历，只是在深度优先遍历的过程中记录
-            dfs(s);
+            // 从s开始深度优先遍历，在深度优先遍历的过程中记录某个顶点是来自哪里的访问
+            // dfs(s);
+            // 从s开始广度优先遍历，在广度优先遍历的过程中记录某个顶点是来自哪里的访问
+            bfs(s);
         }
         
         /**
@@ -62,6 +63,35 @@ public class DenseGraphPathDemo01 {
                     // 设置from的值，保存v能直接到达的顶点
                     this.from[i] = v;
                     dfs(i);
+                }
+            }
+        }
+        
+        /**
+         * 广度优先遍历
+         * 广度优先遍历求出了无权图的最短路径
+         *
+         * @param v
+         */
+        private void bfs(int v) {
+            assert v >= 0 && v < dg.V();
+            
+            Queue<Integer> queue = new LinkedList<>();
+            queue.offer(v);
+            
+            while (!queue.isEmpty()) {
+                Integer cur = queue.poll();
+                visited[cur] = true;
+                // 接下来把顶点直接能到达的路径全部加入到队列中
+                List<Boolean> curNode = dg.get(cur);
+                for (int i = 0; i < curNode.size(); i++) {
+                    if (curNode.get(i)) {
+                        // 如果顶点没有被访问过并且队列中也没有该顶点
+                        if (!visited[i] && !queue.contains(i)) {
+                            queue.offer(i);
+                            from[i] = cur;
+                        }
+                    }
                 }
             }
         }
