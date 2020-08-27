@@ -5,7 +5,7 @@ package org.teiba.java.dsa.graph;
  *
  * @author zail
  */
-public class DenseGraphBFSIterateDemo01 {
+public class DenseGraphBFSDemo01 {
     
     public static void main(String[] args) {
     }

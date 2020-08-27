@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author zail
  */
-public class DenseGraphDFSIterateDemo01 {
+public class DenseGraphDFSDemo01 {
     
     public static void main(String[] args) {
         int n = 6;

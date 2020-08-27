@@ -7,7 +7,7 @@ import java.util.Arrays;
  *
  * @author zail
  */
-public class SparseGraphDFSIterateDemo01 {
+public class SparseGraphDFSDemo01 {
     
     public static void main(String[] args) {
         int n = 10;

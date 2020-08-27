@@ -113,10 +113,11 @@ public class DenseGraphDemo01 {
             for (List<Boolean> bls : g) {
                 StringBuilder appendStr = new StringBuilder();
                 appendStr.append("[");
-                for (Boolean bl : bls) {
-                    appendStr
-                        .append(bl ? "1" : "0")
-                        .append(", ");
+                for (int i = 0; i < bls.size(); i++) {
+                    appendStr.append(bls.get(i) ? "1" : "0");
+                    if (i != bls.size() - 1) {
+                        appendStr.append(", ");
+                    }
                 }
                 str.append(appendStr.append("]\n").toString());
             }
