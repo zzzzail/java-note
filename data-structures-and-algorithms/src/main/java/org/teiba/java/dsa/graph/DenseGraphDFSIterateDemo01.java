@@ -32,13 +32,21 @@ public class DenseGraphDFSIterateDemo01 {
         boolean[] visited;
         // 记录有多少个联通分量
         int componentCount;
+        // 记录图中哪些节点是相连的。初始值为-1，大于-1的值中每一个值与它相等的值是相连的。
+        // 例如[0, 1, 0, 2]
+        // 其中有三块联通分量；第0个元素和第2个元素在一个区域内是相连的；
+        // 第1个顶点自成一块区域；第3个顶点自成一块区域；
+        int[] componentIds;
         
         public Component(DenseGraphDemo01.DenseGraph dg) {
             this.dg = dg;
             // 初始化visited，默认任何一个节点都没有被访问过
             this.visited = new boolean[dg.V()];
+            // 初始化连通分量id列表
+            this.componentIds = new int[dg.V()];
             for (int i = 0; i < dg.V(); i++) {
                 this.visited[i] = false;
+                this.componentIds[i] = -1;
             }
             this.componentCount = 0;
         }
@@ -61,6 +69,8 @@ public class DenseGraphDFSIterateDemo01 {
          */
         private void dfs(int v) {
             visited[v] = true;
+            // 把所有联通着的节点的值设置为componentCount的值，由此就可以判断哪两个节点是连通的了。
+            componentIds[v] = componentCount;
             List<Boolean> list = dg.get(v);
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i) && !visited[i]) {
@@ -72,13 +82,14 @@ public class DenseGraphDFSIterateDemo01 {
         public int count() {
             return this.componentCount;
         }
-        
+    
         @Override
         public String toString() {
             return "Component{" +
                 "dg=" + dg +
                 ", visited=" + Arrays.toString(visited) +
                 ", componentCount=" + componentCount +
+                ", componentIds=" + Arrays.toString(componentIds) +
                 '}';
         }
     }
