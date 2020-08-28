@@ -1,7 +1,6 @@
 package org.teiba.java.dsa.weighted_graph;
 
-import org.teiba.java.dsa.heap.IndexMinHeap;
-import org.teiba.java.dsa.heap.MinHeap;
+import org.teiba.java.dsa.heap.IndexMinHeapDemo02;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ public class MinimumSpanTreeDemo02 {
         // 图对象
         DenseGraphDemo01.DenseGraph denseGraph;
         // 使用最小索引堆作为优先级队列
-        IndexMinHeap<Integer> indexPriorityQueue;
+        IndexMinHeapDemo02.IndexMinHeap<Integer> indexPriorityQueue;
         // 访问的点所对应的边, 算法辅助数据结构
         Edge[] edgeTo;
         // 切分时要将一个一个顶点切分到另一边去，marked用来标记到另一边的顶点（红色的）
@@ -36,7 +35,7 @@ public class MinimumSpanTreeDemo02 {
         
         public PrimMST(DenseGraphDemo01.DenseGraph denseGraph) {
             this.denseGraph = denseGraph;
-            this.indexPriorityQueue = new IndexMinHeap<>(denseGraph.V());
+            this.indexPriorityQueue = new IndexMinHeapDemo02.IndexMinHeap<>(denseGraph.V());
             this.edgeTo = new Edge[denseGraph.V()];
             this.marked = new Boolean[denseGraph.V()];
             for (int i = 0; i < denseGraph.V(); i++) {
