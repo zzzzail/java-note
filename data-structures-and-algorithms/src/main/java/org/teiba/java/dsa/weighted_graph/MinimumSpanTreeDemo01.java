@@ -3,7 +3,6 @@ package org.teiba.java.dsa.weighted_graph;
 import org.teiba.java.dsa.heap.MinHeap;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
