@@ -46,6 +46,10 @@ public class Edge implements Comparable<Edge> {
         return x.equals(to) ? from : to;
     }
     
+    public Integer getTo() {
+        return to;
+    }
+    
     @Override
     public String toString() {
         return from + "-" + to + ":" + weight;

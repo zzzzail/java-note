@@ -67,7 +67,7 @@ public class SparseGraphDemo01 {
             assert from >= 0 && from < n;
             assert to >= 0 && to < n;
             assert weight >= 0;
-            // 如果存在边
+            // 如果存在边（平行边）
             if (hasEdge(from, to)) return;
             
             Edge newEdge = Edge.of(from, to, weight);
@@ -95,9 +95,10 @@ public class SparseGraphDemo01 {
             LinkedList<Edge> edges = this.g.get(from);
             if (edges.size() == 0)
                 return false;
-            for (Edge edge : edges)
+            for (Edge edge : edges) {
                 if (edge.to.equals(to))
                     return true;
+            }
             
             return false;
         }
