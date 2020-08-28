@@ -46,8 +46,46 @@ public class MinimumSpanTreeDemo02 {
             this.mst = new ArrayList<>(denseGraph.V());
             
             // Prim 算法开始
+            visit(0);
+            while (!indexPriorityQueue.isEmpty()) {
+                int v = indexPriorityQueue.extractMinIndex();
+                // 确认一下这个横切边是存在的
+                if (edgeTo[v] != null) {
+                    mst.add(edgeTo[v]);
+                    visit(v);
+                }
+            }
+            
+            // 计算总的权重值
+            mstWeight = mst.get(0).weight;
+            for (int i = 1; i < mst.size(); i++) {
+                this.mstWeight += mst.get(i).weight;
+            }
         }
         
+        private void visit(Integer v) {
+            if (!marked[v]) return;
+            marked[v] = true;
+            
+            List<Edge> edges = denseGraph.get(v);
+            for (int i = 0; i < edges.size(); i++) {
+                Edge e = edges.get(i);
+                if (e != null) {
+                    Integer w = e.to;
+                    if (!marked[w]) {
+                        if (edgeTo[w] != null) {
+                            indexPriorityQueue.insert(w, e.weight);
+                            edgeTo[w] = e;
+                        }
+                        // 不再考虑以前的权值更大的横切边了
+                        else if (e.weight < edgeTo[w].weight) {
+                            edgeTo[w] = e;
+                            indexPriorityQueue.change(w, e.weight);
+                        }
+                    }
+                }
+            }
+        }
         
         /**
          * 返回最小生成树
