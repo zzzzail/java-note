@@ -14,24 +14,7 @@ import java.util.List;
 public class MinimumSpanTreeDemo01 {
     
     public static void main(String[] args) {
-        DenseGraphDemo01.DenseGraph dg = new DenseGraphDemo01.DenseGraph(8, false);
-        dg.addEdge(4, 5, 35);
-        dg.addEdge(4, 7, 37);
-        dg.addEdge(5, 7, 28);
-        dg.addEdge(0, 7, 16);
-        dg.addEdge(1, 5, 32);
-        dg.addEdge(0, 4, 38);
-        dg.addEdge(2, 3, 17);
-        dg.addEdge(1, 7, 19);
-        dg.addEdge(0, 2, 26);
-        dg.addEdge(1, 2, 36);
-        dg.addEdge(1, 3, 29);
-        dg.addEdge(2, 7, 34);
-        dg.addEdge(6, 2, 40);
-        dg.addEdge(3, 6, 52);
-        dg.addEdge(6, 0, 58);
-        dg.addEdge(6, 4, 93);
-        
+        DenseGraphDemo01.DenseGraph dg = DenseGraphDemo01.create(false);
         // 最小生成树
         LazyPrimMST mst = new LazyPrimMST(dg);
         System.out.println(mst);

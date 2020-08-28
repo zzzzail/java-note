@@ -26,6 +26,27 @@ public class DenseGraphDemo01 {
         return dg;
     }
     
+    public static DenseGraph create(boolean directed) {
+        DenseGraphDemo01.DenseGraph dg = new DenseGraphDemo01.DenseGraph(8, directed);
+        dg.addEdge(4, 5, 35);
+        dg.addEdge(4, 7, 37);
+        dg.addEdge(5, 7, 28);
+        dg.addEdge(0, 7, 16);
+        dg.addEdge(1, 5, 32);
+        dg.addEdge(0, 4, 38);
+        dg.addEdge(2, 3, 17);
+        dg.addEdge(1, 7, 19);
+        dg.addEdge(0, 2, 26);
+        dg.addEdge(1, 2, 36);
+        dg.addEdge(1, 3, 29);
+        dg.addEdge(2, 7, 34);
+        dg.addEdge(6, 2, 40);
+        dg.addEdge(3, 6, 52);
+        dg.addEdge(6, 0, 58);
+        dg.addEdge(6, 4, 93);
+        return dg;
+    }
+    
     static class DenseGraph {
         // 节点数
         Integer n;
