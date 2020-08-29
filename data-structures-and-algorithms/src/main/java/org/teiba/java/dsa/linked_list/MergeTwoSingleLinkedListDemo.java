@@ -1,4 +1,4 @@
-package org.teiba.java.dsa.linkedlist;
+package org.teiba.java.dsa.linked_list;
 
 /**
  * 两个有序的链表合并

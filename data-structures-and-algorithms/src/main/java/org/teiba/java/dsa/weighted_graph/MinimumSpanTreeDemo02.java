@@ -47,7 +47,7 @@ public class MinimumSpanTreeDemo02 {
             // Prim 算法开始
             visit(0);
             while (!indexPriorityQueue.isEmpty()) {
-                int v = indexPriorityQueue.extractMinIndex();
+                Integer v = indexPriorityQueue.extractMinIndex();
                 // 确认一下这个横切边是存在的
                 if (edgeTo[v] != null) {
                     mst.add(edgeTo[v]);
@@ -63,7 +63,7 @@ public class MinimumSpanTreeDemo02 {
         }
         
         private void visit(Integer v) {
-            if (!marked[v]) return;
+            if (marked[v]) return;
             marked[v] = true;
             
             List<Edge> edges = denseGraph.get(v);
@@ -72,14 +72,14 @@ public class MinimumSpanTreeDemo02 {
                 if (e != null) {
                     Integer w = e.to;
                     if (!marked[w]) {
-                        if (edgeTo[w] != null) {
+                        if (edgeTo[w] == null) {
                             indexPriorityQueue.insert(w, e.weight);
                             edgeTo[w] = e;
                         }
                         // 不再考虑以前的权值更大的横切边了
                         else if (e.weight < edgeTo[w].weight) {
-                            edgeTo[w] = e;
                             indexPriorityQueue.change(w, e.weight);
+                            edgeTo[w] = e;
                         }
                     }
                 }

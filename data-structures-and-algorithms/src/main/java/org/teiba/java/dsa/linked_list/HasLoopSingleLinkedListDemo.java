@@ -1,4 +1,4 @@
-package org.teiba.java.dsa.linkedlist;
+package org.teiba.java.dsa.linked_list;
 
 import java.util.HashMap;
 import java.util.Map;

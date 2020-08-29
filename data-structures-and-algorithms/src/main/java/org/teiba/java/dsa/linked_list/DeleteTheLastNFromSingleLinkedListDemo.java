@@ -1,4 +1,4 @@
-package org.teiba.java.dsa.linkedlist;
+package org.teiba.java.dsa.linked_list;
 
 /**
  * 删除链表倒数第n个节点
