@@ -1,14 +1,17 @@
 package org.teiba.java.dsa.heap;
 
+import java.util.Arrays;
+
 // 最小索引堆
 public class IndexMinHeapDemo02 {
     
     // 测试 IndexMinHeap
     public static void main(String[] args) {
-        int N = 1000000;
-        IndexMinHeap<Integer> indexMinHeap = new IndexMinHeap<Integer>(N);
+        int N = 10;
+        IndexMinHeap<Integer> indexMinHeap = new IndexMinHeap<>(N);
         for (int i = 0; i < N; i++)
             indexMinHeap.insert(i, (int) (Math.random() * N));
+        System.out.println(indexMinHeap);
     }
     
     public static class IndexMinHeap<Item extends Comparable> {
@@ -140,7 +143,6 @@ public class IndexMinHeapDemo02 {
         
         // 索引堆中, 数据之间的比较根据data的大小进行比较, 但实际操作的是索引
         private void shiftUp(int k) {
-            
             while (k > 1 && data[indexes[k / 2]].compareTo(data[indexes[k]]) > 0) {
                 swapIndexes(k, k / 2);
                 k /= 2;
@@ -161,7 +163,16 @@ public class IndexMinHeapDemo02 {
                 k = j;
             }
         }
-        
-        
+    
+        @Override
+        public String toString() {
+            return "IndexMinHeap{" +
+                "data=" + Arrays.toString(data) +
+                ", indexes=" + Arrays.toString(indexes) +
+                ", reverse=" + Arrays.toString(reverse) +
+                ", count=" + count +
+                ", capacity=" + capacity +
+                '}';
+        }
     }
 }
