@@ -14,7 +14,7 @@ public class IndexMinHeapDemo02 {
         System.out.println(indexMinHeap);
     }
     
-    public static class IndexMinHeap<Item extends Comparable> {
+    public static class IndexMinHeap<Item extends Comparable<Item>> {
         
         protected Item[] data;      // 最小索引堆中的数据
         protected int[] indexes;    // 最小索引堆中的索引, indexes[x] = i 表示索引i在x的位置

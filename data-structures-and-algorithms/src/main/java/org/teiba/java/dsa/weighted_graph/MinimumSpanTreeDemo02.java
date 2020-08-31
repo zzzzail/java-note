@@ -24,7 +24,7 @@ public class MinimumSpanTreeDemo02 {
         DenseGraphDemo01.DenseGraph denseGraph;
         // 使用最小索引堆作为优先级队列
         IndexMinHeapDemo02.IndexMinHeap<Integer> indexPriorityQueue;
-        // 访问的点所对应的边, 算法辅助数据结构
+        // （存储和每个节点连接的最短的横切边，配合最小索引堆使用）访问的点所对应的边, 算法辅助数据结构
         Edge[] edgeTo;
         // 切分时要将一个一个顶点切分到另一边去，marked用来标记到另一边的顶点（红色的）
         Boolean[] marked;
@@ -63,20 +63,26 @@ public class MinimumSpanTreeDemo02 {
         }
         
         private void visit(Integer v) {
+            // 如果顶点被标记为红色，则直接略过
             if (marked[v]) return;
-            marked[v] = true;
+            marked[v] = true; // 标记顶点为红色
             
+            // 访问顶点v的所有的邻边
             List<Edge> edges = denseGraph.get(v);
             for (int i = 0; i < edges.size(); i++) {
                 Edge e = edges.get(i);
                 if (e != null) {
-                    Integer w = e.to;
+                    Integer w = e.other(v);
+                    // 如果w被标记为红色了，则直接略过（这条边不是横切边）
                     if (!marked[w]) {
+                        // 之前有没有找到过和w连接的横切边，如果没有找到过，则直接加入到队列和edgeTo中即可
                         if (edgeTo[w] == null) {
                             indexPriorityQueue.insert(w, e.weight);
                             edgeTo[w] = e;
                         }
-                        // 不再考虑以前的权值更大的横切边了
+                        // 如果之前找到过和w连接的横切边，则判断一下e的权值是否小于存储在edgeTo中的边的权值
+                        // 如果e的权值小，则替换最小索引堆和edgeTo中的数据
+                        // 这里只考虑e的权值比edgeTo存储的权值小的情况，不再考虑权值更大的横切边了
                         else if (e.weight < edgeTo[w].weight) {
                             indexPriorityQueue.change(w, e.weight);
                             edgeTo[w] = e;
